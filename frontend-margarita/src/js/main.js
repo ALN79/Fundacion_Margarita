@@ -5,6 +5,8 @@ import { registerPage } from './pages/registerPage'
 import { register } from './services/register'
 import { Header } from './components/header'
 import { landingPage } from './pages/landingPage'
+import { recoverPage } from './pages/recoverPage'
+import { recover } from './services/recover'
 
 //Definir ruta
 const pathname = window.location.pathname
@@ -34,6 +36,14 @@ const cargarPagina = async () => {
         const formLogin = document.getElementById("formLogin")
         if (formLogin) {
             formLogin.addEventListener("submit", login)
+        }
+    }
+    //Cargar register
+    if (pathname === "/recover") {
+        $app.appendChild(recoverPage())
+        const formRecover = document.getElementById("formRecover")
+        if (formRecover) {
+            formRecover.addEventListener("submit", recover)
         }
     }
 }

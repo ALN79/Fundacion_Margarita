@@ -1,7 +1,11 @@
 import { ConnectionDataBase } from "../src/database.js";
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import { SECRET_KEY } from "../env/config.js";
+dotenv.config();
 
 export const registerUsers = async (req, res) => {
     //Guarda los datos que el usuario ingreso en el register
@@ -82,3 +86,76 @@ export const loginUsers = async (req, res) => {
     }
 
 }
+
+// Configura Nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+  
+  export const resetPassword = async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      // Verifica si el correo existe en la base de datos
+      const [user] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
+      if (!user) {
+        return res.status(400).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Genera un token aleatorio
+      const token = crypto.randomBytes(20).toString('hex');
+  
+      // Establece una fecha de expiración (ej: 1 hora)
+      const expirationDate = Date.now() + 3600000; // 1 hora
+  
+      // Actualiza el token y la fecha de expiración en la base de datos
+      await connection.query('UPDATE users SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?', 
+        [token, expirationDate, email]);
+  
+      // Configura el correo para enviar
+      const mailOptions = {
+        to: email,
+        from: process.env.EMAIL_USER,
+        subject: 'Restablecer Contraseña',
+        text: `Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:\n\n
+          http://${req.headers.host}/reset/${token}\n\n
+          Si no solicitaste este correo, simplemente ignóralo y no se hará ningún cambio.\n`,
+      };
+  
+      // Envía el correo
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'Correo enviado para restablecer la contraseña' });
+    } catch (err) {
+      res.status(500).json({ message: 'Error al procesar la solicitud', error: err.message });
+    }
+  };
+  
+  export const updatePassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+  
+    try {
+      // Verifica si el token es válido y no ha expirado
+      const [user] = await connection.query('SELECT * FROM users WHERE reset_password_token = ? AND reset_password_expires > ?', 
+        [token, Date.now()]);
+      
+      if (!user) {
+        return res.status(400).json({ message: 'Token inválido o expirado' });
+      }
+  
+      // Genera un salt y hashea la nueva contraseña
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+  
+      // Actualiza la contraseña en la base de datos y elimina el token
+      await connection.query('UPDATE users SET password = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id = ?', 
+        [hashedPassword, user.id]);
+  
+      res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+    } catch (err) {
+      res.status(500).json({ message: 'Error al actualizar la contraseña', error: err.message });
+    }
+  };
