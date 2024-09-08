@@ -1,6 +1,8 @@
 import '../styles/style.css'
 import { loginPage } from './pages/loginPage'
+import { login } from './services/login'
 import { registerPage } from './pages/registerPage'
+import { register } from './services/register'
 import { Header } from './components/header'
 import { landingPage } from './pages/landingPage'
 
@@ -12,14 +14,28 @@ const $app = document.getElementById("app")
 //Cargar toda la página
 const cargarPagina = async () => {
     
-    $app.appendChild(Header());
-
     //Cargar Landing Page
-    if (pathname === "/") $app.appendChild(landingPage())
+    if (pathname === "/home") {
+        $app.appendChild(Header());
+        $app.appendChild(landingPage())
+    }
+
     //Cargar Register
-    if (pathname === "/register") $app.appendChild(registerPage())
+    if (pathname === "/register") {
+        $app.appendChild(registerPage())
+        const formRegister = document.getElementById("formRegister")
+        if (formRegister) {
+            formRegister.addEventListener("submit", register)
+        }
+    }
     //Cargar Login
-    if (pathname === "/login") $app.appendChild(loginPage())
+    if (pathname === "/login") {
+        $app.appendChild(loginPage())
+        const formLogin = document.getElementById("formLogin")
+        if (formLogin) {
+            formLogin.addEventListener("submit", login)
+        }
+    }
 }
 
 cargarPagina()
