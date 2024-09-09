@@ -3,7 +3,9 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from 'cookie-parser';
 import { router } from "../routes/main.routes.js";
-import { PORT } from "../env/config.js";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express()
 
@@ -22,4 +24,6 @@ app.use(cookieParser());
 app.use(router)
 
 //Inicio del servidor en PORT 3000
-app.listen(PORT, console.log("Server Running", PORT));
+app.listen(process.env.PORT, () => {
+    console.log("Server Running on port", process.env.PORT);
+});

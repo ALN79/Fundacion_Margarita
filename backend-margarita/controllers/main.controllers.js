@@ -4,7 +4,6 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { SECRET_KEY } from "../env/config.js";
 dotenv.config();
 
 export const registerUsers = async (req, res) => {
@@ -69,7 +68,7 @@ export const loginUsers = async (req, res) => {
                     id: searchUser[0].id, 
                     username: searchUser[0].email
                 },
-                    SECRET_KEY, { expiresIn: "5h" }
+                  process.env.SECRET_KEYs, { expiresIn: "5h" }
                 )
                 //Se guarda el jwt en una cookie para que no se pueda ver desde el navegador
                 res.cookie('token', token, {
