@@ -1,9 +1,9 @@
 const recover = async (e) => {
 
-    e.preventdefault()
+    e.preventDefault()
 
     //Guardar los datos del formulario
-    const emailRecover = document.getElementById("emailRecover")
+    const emailRecover = document.getElementById("emailRecover").value.trim()
 
     if (!emailRecover) {
         return alert("Todos los campos son obligatorios");
