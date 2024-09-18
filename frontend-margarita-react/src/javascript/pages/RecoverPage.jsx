@@ -1,4 +1,4 @@
-function RecoverPage() {
+export function RecoverPage() {
     return (
         <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
             <main className="flex justify-center items-center">
@@ -16,4 +16,3 @@ function RecoverPage() {
     );
 }
 
-export { RecoverPage };

@@ -1,6 +1,6 @@
 import { Header } from '../components/Header.jsx';
 
-function LandingPage() {
+export function LandingPage() {
 
     return (
         <div className='bg-custom-bg-2 bg-cover h-screen'>
@@ -11,4 +11,3 @@ function LandingPage() {
         </div>
     );
 }
-export { LandingPage }

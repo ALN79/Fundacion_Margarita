@@ -1,4 +1,4 @@
-const login = async (e) => {
+export const login = async (e) => {
 
     e.preventDefault()
 
@@ -36,4 +36,3 @@ const login = async (e) => {
 
 
 
-export {login}

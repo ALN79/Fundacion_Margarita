@@ -1,8 +1,10 @@
-function LoginPage() {
+import { login } from "../services/login.js";
+
+export function LoginPage() {
     return (
         <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
             <main className="flex justify-center items-center">
-                <form id="formLogin" action="" className="flex flex-col">
+                <form id="formLogin" action="" className="flex flex-col" onSubmit={login}>
                     <p className="text-4xl text-center font-bold mb-5 mt-24">Inicia Sesión</p>
                     <p className="text-center mb-5 font-medium">Inicia Sesión para continuar</p>
 
@@ -19,5 +21,3 @@ function LoginPage() {
         </div>
     );
 }
-
-export { LoginPage };

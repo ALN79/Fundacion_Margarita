@@ -1,8 +1,10 @@
-function RegisterPage() {
+import {register} from "../services/register.js"
+
+export function RegisterPage() {
     return (
         <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
             <main className="flex justify-center items-center">
-                <form id="formRegister" className="flex flex-col">
+                <form id="formRegister" className="flex flex-col" onSubmit={register}>
                     <p className="text-4xl text-center font-bold mb-5 mt-20">Regístrate</p>
                     <p className="text-center mb-5 font-medium">¿Ya estás registrado? <a href="/login" className="text-yellow-400 hover:text-yellow-500">Inicia Sesión</a></p>
                     
@@ -24,5 +26,3 @@ function RegisterPage() {
         </div>
     );
 }
-
-export { RegisterPage };

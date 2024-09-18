@@ -1,4 +1,4 @@
-const recover = async (e) => {
+export const recover = async (e) => {
 
     e.preventDefault()
 
@@ -32,4 +32,3 @@ const recover = async (e) => {
     }
 }
 
-export {recover}

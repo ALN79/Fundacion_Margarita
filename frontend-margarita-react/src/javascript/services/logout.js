@@ -1,4 +1,4 @@
-const logout = async (e) => {
+export const logout = async (e) => {
     try {
         const peticionLogout = await fetch('http://localhost:3000/logoutUsers', {
             method: 'POST',
@@ -16,4 +16,3 @@ const logout = async (e) => {
     }
 }
 
-export {logout}
