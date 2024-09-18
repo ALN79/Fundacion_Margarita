@@ -1,34 +1,41 @@
 import '../styles/style.css'
 import { loginPage } from './pages/loginPage'
 import { login } from './services/login'
+import { logout } from './services/logout'
 import { registerPage } from './pages/registerPage'
 import { register } from './services/register'
 import { Header } from './components/header'
 import { landingPage } from './pages/landingPage'
 import { recoverPage } from './pages/recoverPage'
 import { recover } from './services/recover'
-import { noSessionPage } from './pages/noSessionPage'
-import { noSessionHeader } from './components/noSessionHeader'
+import { authJWT } from './services/authJWT'
 
-//Definir ruta
+
 const pathname = window.location.pathname
 
 const $app = document.getElementById("app")
 
-//Cargar toda la página
+
 const cargarPagina = async () => {
-    // Cargar noSessionPage
-    if (pathname === "/") {
-        $app.appendChild(noSessionHeader());
-        $app.appendChild(noSessionPage())
-    }
-    //Cargar Landing Page
+
+    const user = await authJWT()
+
+   
     if (pathname === "/home") {
+        
+        if (!user) {
+            window.location.href = '/login';
+        }
+
         $app.appendChild(Header());
         $app.appendChild(landingPage())
+        const logoutButton = document.getElementById("logout");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", logout);
+        }
     }
 
-    //Cargar Register
+
     if (pathname === "/register") {
         $app.appendChild(registerPage())
         const formRegister = document.getElementById("formRegister")
@@ -36,7 +43,7 @@ const cargarPagina = async () => {
             formRegister.addEventListener("submit", register)
         }
     }
-    //Cargar Login
+    
     if (pathname === "/login") {
         $app.appendChild(loginPage())
         const formLogin = document.getElementById("formLogin")
@@ -44,7 +51,7 @@ const cargarPagina = async () => {
             formLogin.addEventListener("submit", login)
         }
     }
-    //Cargar register
+    
     if (pathname === "/recover") {
         $app.appendChild(recoverPage())
         const formRecover = document.getElementById("formRecover")

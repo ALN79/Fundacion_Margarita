@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 dotenv.config();
 
+//Registro de usuarios
 export const registerUsers = async (req, res) => {
     //Guarda los datos que el usuario ingreso en el register
     const { name, surname, email, password } = req.body
@@ -39,7 +40,7 @@ export const registerUsers = async (req, res) => {
 
 }
 
-
+//Inicio de Sesión de usuarios
 export const loginUsers = async (req, res) => {
     //Guarda los datos que el usuario ingreso en el login
     const { emailLogin, passwordLogin } = req.body
@@ -66,9 +67,10 @@ export const loginUsers = async (req, res) => {
             else {
                 const token = jwt.sign({
                     id: searchUser[0].id, 
-                    username: searchUser[0].email
+                    email: searchUser[0].email,
+                    username: searchUser[0].nombre_us
                 },
-                  process.env.SECRET_KEYs, { expiresIn: "5h" }
+                  process.env.SECRET_KEY, { expiresIn: "5h" }
                 )
                 //Se guarda el jwt en una cookie para que no se pueda ver desde el navegador
                 res.cookie('token', token, {
@@ -83,8 +85,21 @@ export const loginUsers = async (req, res) => {
     } catch (error) {
         console.error("Error al iniciar sesión", error)
     }
-
 }
+
+//Verifica si el token es valido. Este controlador usa el middleware: auhtenticateJWT
+export const checkAuth = (req, res) => {
+  res.status(200).json({ user: req.user });
+  console.log(req.user)
+};
+
+//Cerrar Sesión de usuarios
+export const logoutUsers = (req, res) => {
+  //Borra el token de la cookie
+  res.clearCookie('token', { httpOnly: true }); 
+  res.status(200).json({ message: 'Logout exitoso' });
+};
+
 
 // Configura Nodemailer
 const transporter = nodemailer.createTransport({
