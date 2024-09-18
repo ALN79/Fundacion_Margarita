@@ -6,6 +6,7 @@ function Header () {
         <img src="img/logoPagina.svg" alt="" className="px-4" height="auto" width="370" />
       </div>
       <div className="flex justify-evenly w-screen">
+        <button className="font-medium hover:font-semibold transition-all">INICIO</button>
         <button className="font-medium hover:font-semibold transition-all">NOVEDADES</button>
         <button className="font-medium hover:font-semibold transition-all">METAS</button>
         <button className="font-medium hover:font-semibold transition-all">SOBRE NOSOTROS</button>
