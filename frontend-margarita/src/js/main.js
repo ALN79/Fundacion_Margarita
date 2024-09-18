@@ -7,6 +7,8 @@ import { Header } from './components/header'
 import { landingPage } from './pages/landingPage'
 import { recoverPage } from './pages/recoverPage'
 import { recover } from './services/recover'
+import { noSessionPage } from './pages/noSessionPage'
+import { noSessionHeader } from './components/noSessionHeader'
 
 //Definir ruta
 const pathname = window.location.pathname
@@ -15,7 +17,11 @@ const $app = document.getElementById("app")
 
 //Cargar toda la página
 const cargarPagina = async () => {
-    
+    // Cargar noSessionPage
+    if (pathname === "/") {
+        $app.appendChild(noSessionHeader());
+        $app.appendChild(noSessionPage())
+    }
     //Cargar Landing Page
     if (pathname === "/home") {
         $app.appendChild(Header());

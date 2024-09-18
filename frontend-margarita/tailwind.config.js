@@ -9,6 +9,7 @@ module.exports = {
     backgroundImage: {
       'custom-bg-1': "url('img/fondoDeLoginRegister.svg')",
       'custom-bg-2': "url('img/fondoLandingPage.svg')",
+      "custom-bg-3": "url('img/fondoMain.svg')",
     }
   },
   },
