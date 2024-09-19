@@ -111,11 +111,13 @@ const transporter = nodemailer.createTransport({
   });
   
   export const resetPassword = async (req, res) => {
-    const { email } = req.body;
-  
+    const { emailRecover } = req.body;
+    
+    const connection = await ConnectionDataBase()
+
     try {
       // Verifica si el correo existe en la base de datos
-      const [user] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
+      const [user] = await connection.query('SELECT * FROM usuario WHERE email = ?', [emailRecover]);
       if (!user) {
         return res.status(400).json({ message: 'Usuario no encontrado' });
       }
@@ -124,15 +126,16 @@ const transporter = nodemailer.createTransport({
       const token = crypto.randomBytes(20).toString('hex');
   
       // Establece una fecha de expiración (ej: 1 hora)
-      const expirationDate = Date.now() + 3600000; // 1 hora
+      const expirationDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
+      const formattedExpirationDate = expirationDate.toISOString().slice(0, 19).replace('T', ' '); //Formatea el horario para mySQL
+      console.log(formattedExpirationDate)
   
       // Actualiza el token y la fecha de expiración en la base de datos
-      await connection.query('UPDATE users SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?', 
-        [token, expirationDate, email]);
-  
+      await connection.query('UPDATE usuario SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?', 
+        [token, formattedExpirationDate, emailRecover]);
       // Configura el correo para enviar
       const mailOptions = {
-        to: email,
+        to: emailRecover,
         from: process.env.EMAIL_USER,
         subject: 'Restablecer Contraseña',
         text: `Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:\n\n
@@ -150,13 +153,17 @@ const transporter = nodemailer.createTransport({
   
   export const updatePassword = async (req, res) => {
     const { token, newPassword } = req.body;
-  
+    
+    const connection = await ConnectionDataBase()
+
+    const dateNow = new Date().toISOString().slice(0, 19).replace('T', ' '); //Formatea la fecha actual para MySQL
+
     try {
       // Verifica si el token es válido y no ha expirado
-      const [user] = await connection.query('SELECT * FROM users WHERE reset_password_token = ? AND reset_password_expires > ?', 
-        [token, Date.now()]);
-      
-      if (!user) {
+      const [user] = await connection.query('SELECT * FROM usuario WHERE reset_password_token = ? AND reset_password_expires > ?', 
+        [token, dateNow]);
+
+      if (user.length === 0) {
         return res.status(400).json({ message: 'Token inválido o expirado' });
       }
   
@@ -165,9 +172,9 @@ const transporter = nodemailer.createTransport({
       const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
   
       // Actualiza la contraseña en la base de datos y elimina el token
-      await connection.query('UPDATE users SET password = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id = ?', 
-        [hashedPassword, user.id]);
-  
+      const query = await connection.query('UPDATE usuario SET contraseña = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id_usuario = ?', 
+        [hashedPassword, user[0].id_usuario]);
+
       res.status(200).json({ message: 'Contraseña actualizada con éxito' });
     } catch (err) {
       res.status(500).json({ message: 'Error al actualizar la contraseña', error: err.message });

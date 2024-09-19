@@ -11,7 +11,7 @@ export const recover = async (e) => {
 
     try {
         //Envia los datos del formulario al backend
-        const peticionRecover = await fetch("http://localhost:3000/recoverUsers",{
+        const peticionRecover = await fetch("http://localhost:3000/reset-password",{
             method: "POST",
             body: JSON.stringify({emailRecover}),
             headers:{
@@ -25,6 +25,7 @@ export const recover = async (e) => {
             alert(message)
         }
         else{
+            alert("Correo de recuperación enviado correctamente")
             window.location.href = "/login"
         }
     } catch (error) {

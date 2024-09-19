@@ -15,6 +15,7 @@ export function LoginPage() {
                     <input className="border border-black p-3 min-w-80" placeholder="******" type="password" id="passwordLogin" />
                     
                     <p className="text-center mt-5 font-normal">No tienes una cuenta? <a href="/register" className="text-yellow-400 hover:text-yellow-500 transition-colors">Regístrate</a></p>
+                    <p className="text-center text-sm mt-5 font-normal text-yellow-500 hover:text-yellow-600 "><a href="/recover">¿Has olvidado la contraseña?</a></p>
                     <button type="submit" className="bg-yellow-400 text-white px-6 py-3 max-w-44 mt-8 self-center hover:bg-yellow-600 hover:text-slate-50 transition-colors">Inicia Sesión</button>
                 </form>
             </main>

@@ -1,8 +1,10 @@
+import { recover } from "../services/recover";
+
 export function RecoverPage() {
     return (
-        <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
-            <main className="flex justify-center items-center">
-                <form id="formRecover" action="" className="flex flex-col">
+        <div className="flex justify-center items-center bg-custom-bg-1 bg-cover bg-bottom h-screen">
+            <main>
+                <form id="formRecover" action="" className="flex flex-col" onSubmit={recover}>
                     <p className="text-4xl text-center font-bold mb-5 mt-12">Recuperar cuenta</p>
                     <p className="text-center mb-5 font-medium">Ingresa tu correo electrónico</p>
 
