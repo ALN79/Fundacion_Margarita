@@ -1,4 +1,5 @@
 import { Header } from "../components/Header.jsx";
+import { Footer } from "../components/Footer.jsx"; 
 import { enviarConsulta } from "../services/formContact.js";
 import { useState } from "react";
 
@@ -32,7 +33,7 @@ function ContactPage() {
       <Header />
       <div className="flex justify-center">
         <img
-          className="w-full"
+          className="w-full mt-2"
           src="/img/BannerContact.svg"
           alt="404 not found"
         />
@@ -61,8 +62,7 @@ function ContactPage() {
           </div>
         </div>
       </div>
-      
-      {/* Aquí va el formulario */}
+   
       <div className="max-w-md mx-auto mt-10 bg-gray-200 p-6 rounded-lg shadow-md mb-10">
         <h2 className="text-3xl font-bold mb-6 text-center">Envíanos tu consulta</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,15 +97,16 @@ function ContactPage() {
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
+            className="bg-yellow-400 text-white py-2 px-4 rounded hover:bg-yellow-500 w-full"
           >
             Enviar
           </button>
         </form>
       </div>
+
+      <Footer /> 
     </div>
   );
 }
 
 export { ContactPage };
-
