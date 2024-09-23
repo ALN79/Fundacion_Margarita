@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { registerUsers } from "../controllers/main.controllers.js";
+import { FormEmail, registerUsers } from "../controllers/main.controllers.js";
 import { loginUsers } from "../controllers/main.controllers.js";
 import { logoutUsers } from "../controllers/main.controllers.js";
 import { resetPassword } from "../controllers/main.controllers.js";
@@ -16,5 +16,6 @@ router.post("/logoutUsers", logoutUsers)
 router.post('/reset-password', resetPassword)
 router.post('/update-password', updatePassword)
 router.get("/authenticate-jwt", authenticateJWT, checkAuth)
+router.post("/enviar-consulta", FormEmail);
 
 export {router};
