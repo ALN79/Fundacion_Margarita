@@ -180,6 +180,17 @@ function ContactPage() {
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="mb-6 mt-3">
+              <Label htmlFor="name" className="mb-2 block">
+                Tu nombre
+              </Label>
+              <TextInput 
+                id="name" 
+                name="name" 
+                placeholder="Ingresa tu nombre..." 
+                className="w-full"
+              />
+            </div>
+            <div className="mb-6 mt-3">
               <Label htmlFor="email" className="mb-2 block">
                 Tu email
               </Label>
