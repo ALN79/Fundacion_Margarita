@@ -180,3 +180,44 @@ const transporter = nodemailer.createTransport({
       res.status(500).json({ message: 'Error al actualizar la contraseña', error: err.message });
     }
   };
+
+  export const FormEmail = async (req, res) => {
+    // Desestructuración del cuerpo de la solicitud
+    const { name, email, subject, message } = req.body;
+
+    // Verificar que los datos estén presentes
+    if (!name || !email || !subject || !message) {
+        return res.status(400).send('Datos faltantes');
+    }
+
+    // Configurar el transporter de Nodemailer para Gmail
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'fundacionmargarita24@gmail.com',
+            pass: 'ecpf ulqc lvdl dhom', // Usa una contraseña de aplicación
+        },
+    });
+
+    // Configurar el contenido del correo
+    const mailOptions = {
+        from: email, // Email del remitente
+        to: 'fundacionmargarita24@gmail.com', // Tu correo donde recibirás la consulta
+        subject: `Consulta de ${name}`,
+        text: `
+            Nombre: ${name}
+            Email: ${email}
+            Asunto: ${subject}
+            Mensaje: ${message}
+        `,
+    };
+
+    try {
+        // Enviar el correo
+        await transporter.sendMail(mailOptions);
+        res.status(200).send('Correo enviado');
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        res.status(500).send('Error al enviar el correo');
+    }
+};

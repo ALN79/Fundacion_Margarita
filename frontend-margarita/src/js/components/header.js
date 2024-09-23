@@ -19,6 +19,7 @@ const Header = () => {
     <div class="flex items-center mx-10">
         <button id="logout" class="whitespace-nowrap bg-yellow-400 px-8 py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">CERRAR SESIÓN</button>
     </div>
+    
     `
 
     return $header

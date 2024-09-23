@@ -14,7 +14,6 @@ export const authenticateJWT = (req, res, next) => {
         }
         // Si el token es válido guarda la info del usuario en req.user
         req.user = user;
-        console.log(user)
         next()
     });
 };

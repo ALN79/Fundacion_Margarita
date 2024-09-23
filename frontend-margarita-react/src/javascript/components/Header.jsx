@@ -1,20 +1,89 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {logout} from "../services/logout.js"
 
-export function Header () {
-  
+function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header className="font-sans flex flex-row  my-1  bg-white-400 border-y border-black h-28">
-      <div className="flex items-center justify-center bg-slate-400">
-        <img src="img/logoPagina.svg" alt="" className="px-4" height="auto" width="370" />
-      </div>
-      <div className="flex justify-evenly w-screen">
-        <button className="font-medium hover:font-semibold transition-all">NOVEDADES</button>
-        <button className="font-medium hover:font-semibold transition-all">METAS</button>
-        <button className="font-medium hover:font-semibold transition-all">SOBRE NOSOTROS</button>
-      </div>
-      <div className="flex items-center mx-10">
-        <button onClick={logout} id="logout" className="whitespace-nowrap bg-yellow-400 px-8 py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">CERRAR SESIÓN</button>
-      </div>
-    </header>
+    <>
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          html, body {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      `}</style>
+
+      <header className="font-sans flex flex-row items-center bg-white border-y border-black h-28 relative">
+        <div className="flex items-center bg-slate-400 w-full sm:w-auto p-4">
+          <img src="img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
+        </div>
+
+        <button onClick={toggleMenu} className="sm:hidden absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="white">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <div className="hidden sm:flex flex-row flex-grow items-center ml-4">
+          <Link to="/home">
+            <button className="font-medium hover:font-semibold transition-all mx-2">INICIO</button>
+          </Link>
+          <Link to="/goals">
+            <button className="font-medium hover:font-semibold transition-all mx-2">METAS</button>
+          </Link>
+          <Link to="/AboutUs">
+            <button className="font-medium hover:font-semibold transition-all mx-2">NOSOTROS</button>
+          </Link>
+          <Link to="/contact">
+            <button className="font-medium hover:font-semibold transition-all mx-2">CONTACTANOS</button>
+          </Link>
+        </div>
+
+        <div className="hidden sm:flex items-center ml-auto mr-10">
+          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">
+            MAPA
+          </button>
+          <button onClick={logout} id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all ml-2">
+            CERRAR SESIÓN
+          </button>
+        </div>
+
+        <div className={`fixed inset-0 bg-white bg-opacity-90 z-50 p-4 ${isOpen ? 'flex' : 'hidden'} flex-col items-center`}>
+          <button onClick={toggleMenu} className="self-end text-black text-2xl mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <Link to="/home">
+            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>INICIO</button>
+          </Link>
+          <Link to="/goals"> {/* Cambia "/goals" por la ruta correcta */}
+            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>METAS</button>
+          </Link>
+          <Link to="/AboutUs">
+            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>NOSOTROS</button>
+          </Link>
+          <Link to="/contact">
+            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>CONTACTANOS</button>
+          </Link>
+          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
+            MAPA
+          </button>
+          <button id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
+            CERRAR SESIÓN
+          </button>
+        </div>
+      </header>
+    </>
   );
 }
+
+export { Header };
