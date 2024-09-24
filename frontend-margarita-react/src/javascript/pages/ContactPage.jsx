@@ -1,10 +1,11 @@
 import { Header } from "../components/Header.jsx";
-import { Footer } from "../components/Footer.jsx"; 
+import { Footer } from "../components/footer.jsx";
 import { Label, TextInput, Textarea, Button } from "flowbite-react";
 import { HiEnvelope } from "react-icons/hi2";
 import { FaTshirt, FaBreadSlice, FaDonate, FaBitcoin, FaShareAlt } from "react-icons/fa"; // Íconos
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { sendContact } from "../services/formContact.js";
 
 
 function ContactPage() {
@@ -30,28 +31,8 @@ function ContactPage() {
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const consulta = {
-      nombre,
-      email,
-      mensaje
-    };
-
-    try {
-      await enviarConsulta(consulta);
-      alert('Consulta enviada con éxito');
-      setNombre('');
-      setEmail('');
-      setMensaje('');
-    } catch (error) {
-      alert('Hubo un error al enviar la consulta');
-    }
-  };
-
   return (
-    <div className="bg-custom-bg-2 bg-cover min-h-screen">
+    <div className="bg-custom-bg-2 bg-cover min-h-screen overflow-hidden">
       <Header />
       <div className="flex justify-center">
         <img
@@ -61,8 +42,8 @@ function ContactPage() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-0 py-10">
-      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 relative inline-block group">
+      <div className="container w-screen m-auto sm:px-0 py-10 text-center">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-16 relative inline-block group">
         Formas en las que puedes ayudar
         <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
       </h2>
@@ -171,14 +152,14 @@ function ContactPage() {
       </div>
     </div>
 
-      <div className="container mx-auto px-4 sm:px-0 py-10 flex flex-col lg:flex-row gap-8 justify-center items-center">
+      <div className="container mx-auto px-4 sm:px-5 py-10 flex flex-col lg:flex-row gap-8 justify-center items-center">
         
         <div className="lg:w-2/3 max-w-md lg:max-w-none bg-gray-200 bg-opacity-90 p-6 rounded-lg shadow-md relative overflow-hidden">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center flex items-center justify-center">
             <HiEnvelope className="mr-2" /> {/* Icono de correo */}
             Envíanos tu consulta
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={sendContact} className="space-y-4">
             <div className="mb-6 mt-3">
               <Label htmlFor="name" className="mb-2 block">
                 Tu nombre
@@ -222,22 +203,22 @@ function ContactPage() {
                 name="message" 
                 placeholder="Ingresa tu mensaje..." 
                 rows={4} 
-                className="w-full"
+                className="w-full p-2"
               />
             </div>
             <div className="mb-6">
-              <Button type="submit" className="w-full bg-yellow-400">
+              <Button type="submit" className="w-full bg-yellow-400 p-2 hover:bg-yellow-500 transition-colors">
                 Enviar mensaje
               </Button>
             </div>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
               <a href="mailto:info@company.com" className="hover:underline">
-                info@company.com
+                fundacionmargarita24@gmail.com
               </a>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               <a href="tel:2124567890" className="hover:underline">
-                212-456-7890
+              +54 9 3704 409-3764
               </a>
             </p>
           </form>
@@ -281,7 +262,7 @@ function ContactPage() {
         />
         <p className="text-xl sm:text-2xl font-bold">Contacto</p>
         <p className="text-sm sm:text-lg font-bold">Teléfono: +54 9 3704 409-3764</p>
-        <p className="text-sm sm:text-lg font-bold">Email: fundacionmargarita@gmail.com</p>
+        <p className="text-sm sm:text-lg font-bold">Email: fundacionmargarita24@gmail.com</p>
       </motion.div>
 
       <motion.div

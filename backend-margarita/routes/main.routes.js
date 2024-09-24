@@ -1,21 +1,22 @@
 import { Router } from "express";
 
-import { FormEmail, registerUsers } from "../controllers/main.controllers.js";
-import { loginUsers } from "../controllers/main.controllers.js";
-import { logoutUsers } from "../controllers/main.controllers.js";
-import { resetPassword } from "../controllers/main.controllers.js";
-import { updatePassword } from "../controllers/main.controllers.js"
-import { checkAuth } from "../controllers/main.controllers.js";
-import { authenticateJWT } from "../helpers/authenticateJWT.js";
+import { registerUsersCtrl } from "../controllers/main.controllers.js";
+import { loginUsersCtrl } from "../controllers/main.controllers.js";
+import { logoutUsersCtrl } from "../controllers/main.controllers.js";
+import { resetPasswordCtrl } from "../controllers/main.controllers.js";
+import { updatePasswordCtrl } from "../controllers/main.controllers.js"
+import { FormContactCtrl } from "../controllers/main.controllers.js";
+import { checkAuthCtrl } from "../controllers/main.controllers.js";
+import { authenticateJWTCtrl } from "../helpers/authenticateJWT.js";
 
 const router = Router();
 
-router.post("/registerUsers", registerUsers);
-router.post("/loginUsers", loginUsers)
-router.post("/logoutUsers", logoutUsers)
-router.post('/reset-password', resetPassword)
-router.post('/update-password', updatePassword)
-router.get("/authenticate-jwt", authenticateJWT, checkAuth)
-router.post("/enviar-consulta", FormEmail);
+router.post("/registerUsers", registerUsersCtrl);
+router.post("/loginUsers", loginUsersCtrl)
+router.post("/logoutUsers", logoutUsersCtrl)
+router.post('/reset-password', resetPasswordCtrl)
+router.post('/update-password', updatePasswordCtrl)
+router.get("/authenticate-jwt", authenticateJWTCtrl, checkAuthCtrl)
+router.post("/send-contact", FormContactCtrl);
 
 export {router};

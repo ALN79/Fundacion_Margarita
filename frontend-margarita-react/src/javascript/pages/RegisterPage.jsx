@@ -1,4 +1,5 @@
 import {register} from "../services/register.js"
+import { Link } from 'react-router-dom';
 
 export function RegisterPage() {
     return (
@@ -6,7 +7,9 @@ export function RegisterPage() {
             <main className="flex justify-center items-center">
                 <form id="formRegister" className="flex flex-col" onSubmit={register}>
                     <p className="text-4xl text-center font-bold mb-5 mt-20">Regístrate</p>
+                    <Link to="/login">
                     <p className="text-center mb-5 font-medium">¿Ya estás registrado? <a href="/login" className="text-yellow-400 hover:text-yellow-500">Inicia Sesión</a></p>
+                    </Link>
                     
                     <label htmlFor="name" className="text-sm">NOMBRE:</label>
                     <input className="border border-black p-3 mb-4 min-w-80" placeholder="Lucas" type="text" id="name" />

@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //Registro de usuarios
-export const registerUsers = async (req, res) => {
+export const registerUsersCtrl = async (req, res) => {
     //Guarda los datos que el usuario ingreso en el register
     const { name, surname, email, password } = req.body
     //Conecta a la base de datos
@@ -41,7 +41,7 @@ export const registerUsers = async (req, res) => {
 }
 
 //Inicio de Sesión de usuarios
-export const loginUsers = async (req, res) => {
+export const loginUsersCtrl = async (req, res) => {
     //Guarda los datos que el usuario ingreso en el login
     const { emailLogin, passwordLogin } = req.body
     try {
@@ -88,13 +88,13 @@ export const loginUsers = async (req, res) => {
 }
 
 //Verifica si el token es valido. Este controlador usa el middleware: auhtenticateJWT
-export const checkAuth = (req, res) => {
+export const checkAuthCtrl = (req, res) => {
   res.status(200).json({ user: req.user });
   console.log(req.user)
 };
 
 //Cerrar Sesión de usuarios
-export const logoutUsers = (req, res) => {
+export const logoutUsersCtrl = (req, res) => {
   //Borra el token de la cookie
   res.clearCookie('token', { httpOnly: true }); 
   res.status(200).json({ message: 'Logout exitoso' });
@@ -110,7 +110,7 @@ const transporter = nodemailer.createTransport({
     },
   });
   
-  export const resetPassword = async (req, res) => {
+  export const resetPasswordCtrl = async (req, res) => {
     const { emailRecover } = req.body;
     
     const connection = await ConnectionDataBase()
@@ -151,7 +151,7 @@ const transporter = nodemailer.createTransport({
     }
   };
   
-  export const updatePassword = async (req, res) => {
+  export const updatePasswordCtrl = async (req, res) => {
     const { token, newPassword } = req.body;
     
     const connection = await ConnectionDataBase()
@@ -181,10 +181,10 @@ const transporter = nodemailer.createTransport({
     }
   };
 
-  export const FormEmail = async (req, res) => {
+  export const FormContactCtrl = async (req, res) => {
     // Desestructuración del cuerpo de la solicitud
     const { name, email, subject, message } = req.body;
-
+    
     // Verificar que los datos estén presentes
     if (!name || !email || !subject || !message) {
         return res.status(400).send('Datos faltantes');
@@ -194,8 +194,8 @@ const transporter = nodemailer.createTransport({
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'fundacionmargarita24@gmail.com',
-            pass: 'ecpf ulqc lvdl dhom', // Usa una contraseña de aplicación
+            user: process.env.EMAIL_USER ,
+            pass: process.env.EMAIL_PASSWORD, // Usa una contraseña de aplicación
         },
     });
 
