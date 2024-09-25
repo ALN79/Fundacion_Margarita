@@ -1,12 +1,14 @@
 import { login } from "../services/login.js";
 import { Link } from 'react-router-dom';
+import { NoSessionHeader } from "../components/NoSessionHeader";
 
 export function LoginPage() {
     return (
         <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
+            <NoSessionHeader/>
             <main className="flex justify-center items-center">
                 <form id="formLogin" action="" className="flex flex-col" onSubmit={login}>
-                    <p className="text-4xl text-center font-bold mb-5 mt-24">Inicia Sesión</p>
+                    <p className="text-4xl text-center font-bold mb-5 mt-16">Inicia Sesión</p>
                     <p className="text-center mb-5 font-medium">Inicia Sesión para continuar</p>
 
                     <label htmlFor="emailLogin" className="text-sm">EMAIL:</label>

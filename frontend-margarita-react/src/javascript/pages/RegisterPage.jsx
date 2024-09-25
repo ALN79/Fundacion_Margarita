@@ -1,12 +1,14 @@
 import {register} from "../services/register.js"
 import { Link } from 'react-router-dom';
+import { NoSessionHeader } from "../components/NoSessionHeader";
 
 export function RegisterPage() {
     return (
         <div className="bg-custom-bg-1 bg-cover bg-bottom h-screen">
+            <NoSessionHeader/>
             <main className="flex justify-center items-center">
                 <form id="formRegister" className="flex flex-col" onSubmit={register}>
-                    <p className="text-4xl text-center font-bold mb-5 mt-20">Regístrate</p>
+                    <p className="text-4xl text-center font-bold mb-5 mt-6">Regístrate</p>
                     <Link to="/login">
                     <p className="text-center mb-5 font-medium">¿Ya estás registrado? <a href="/login" className="text-yellow-400 hover:text-yellow-500">Inicia Sesión</a></p>
                     </Link>

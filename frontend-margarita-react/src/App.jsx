@@ -6,7 +6,8 @@ import { RegisterPage } from './javascript/pages/RegisterPage';
 import { RecoverPage } from './javascript/pages/RecoverPage';
 import { ContactPage } from './javascript/pages/ContactPage';
 import { AboutUsPage } from './javascript/pages/AboutUsPage';
-import {NoSessionPage} from "./javascript/pages/NoSessionPage.jsx"
+import {NoSessionPage} from "./javascript/pages/NoSessionPage"
+import { LoadingPage } from './javascript/pages/loadingPage';
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -15,12 +16,7 @@ function App() {
   //Mientras espera la función asincrona, renderiza la pantalla de carga
   if (loading) {
     return (
-      <main className="bg-slate-400">
-        <div className="flex flex-col justify-center items-center rounded-full h-screen w-screen">
-          <img src="img/loadingImage.png" alt="" width="400" height="400" className="animate-spin"/>
-          <h2 className='text-3xl text-white'>Cargando</h2>
-        </div>
-      </main>
+      <LoadingPage/>
     )
   }
 
@@ -44,8 +40,8 @@ function App() {
         <Route path="/contact"
           element={user ? <ContactPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/aboutus"
-          element={user ? <AboutUsPage /> : <Navigate to={"/login"} />}
+        <Route path="/aboutUs"
+          element = {<AboutUsPage/>}
         />
         <Route path="/"
           element = {<NoSessionPage/>}

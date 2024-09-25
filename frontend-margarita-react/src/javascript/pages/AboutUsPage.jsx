@@ -1,12 +1,24 @@
 import React from "react";
 import { Header } from "../components/Header";
 import { motion } from "framer-motion";
-import { Footer } from "../components/footer"; 
+import { Footer } from "../components/footer";
+import { NoSessionHeader } from "../components/NoSessionHeader";
+import { authUser } from "../services/authUser";
+import { LoadingPage } from "./loadingPage";
 
 export function AboutUsPage() {
+
+  const { user, loading } = authUser()
+
+  if (loading) {
+    return (
+      <LoadingPage/>
+    )
+  }
+
   return (
     <div className="bg-custom-bg-2 bg-cover h-screen flex flex-col">
-      <Header />
+      {user ?  <Header /> : <NoSessionHeader/>}
 
       <div className="container mx-auto px-4 py-12 flex-grow">
         <div className="relative text-center mb-8">
@@ -130,7 +142,7 @@ export function AboutUsPage() {
         </div>
       </div>
 
-      <Footer /> 
+      <Footer />
     </div>
   );
 }

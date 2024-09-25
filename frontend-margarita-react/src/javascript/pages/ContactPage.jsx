@@ -9,9 +9,6 @@ import { sendContact } from "../services/formContact.js";
 
 
 function ContactPage() {
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [mensaje, setMensaje] = useState('');
   const [mostrarDescripcionRopa, setMostrarDescripcionRopa] = useState(false);
   const [mostrarDescripcionComida, setMostrarDescripcionComida] = useState(false);
   const [mostrarDescripcionDinero, setMostrarDescripcionDinero] = useState(false);
@@ -207,7 +204,7 @@ function ContactPage() {
               />
             </div>
             <div className="mb-6">
-              <Button type="submit" className="w-full bg-yellow-400 p-2 hover:bg-yellow-500 transition-colors">
+              <Button id="button-contact" type="submit" className="w-full bg-yellow-400 p-2 hover:bg-yellow-500 transition-colors">
                 Enviar mensaje
               </Button>
             </div>
@@ -253,10 +250,10 @@ function ContactPage() {
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="p-4 bg-gray-200 bg-opacity-70 rounded-lg text-center"
+        className="p-4 w-96 bg-gray-200 bg-opacity-70 rounded-lg text-center"
       >
         <img
-          className="w-16 sm:w-1/5 mx-auto"
+          className="w-10 sm:w-1/5 mx-auto"
           src="/img/PhoneIcon.svg"
           alt="404 not found"
         />

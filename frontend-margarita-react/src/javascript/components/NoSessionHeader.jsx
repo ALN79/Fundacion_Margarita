@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {logout} from "../services/logout.js"
 
-function Header() {
+export function NoSessionHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,7 +12,7 @@ function Header() {
     <>
       <header className="font-sans flex flex-row items-center bg-white border-y border-black h-28 relative">
         <div className="flex items-center bg-slate-400 w-full sm:w-auto p-4">
-          <Link to="/home">
+          <Link to="/">
           <img src="img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
           </Link>
         </div>
@@ -25,27 +24,23 @@ function Header() {
         </button>
 
         <div className="hidden sm:flex flex-row flex-grow items-center ml-4">
-          <Link to="/home">
+
+          <Link to="/">
             <button className="font-medium hover:font-semibold transition-all mx-2">INICIO</button>
           </Link>
-          <Link to="/goals">
-            <button className="font-medium hover:font-semibold transition-all mx-2">METAS</button>
-          </Link>
+
           <Link to="/AboutUs">
             <button className="font-medium hover:font-semibold transition-all mx-2">NOSOTROS</button>
-          </Link>
-          <Link to="/contact">
-            <button className="font-medium hover:font-semibold transition-all mx-2">CONTACTANOS</button>
           </Link>
         </div>
 
         <div className="hidden sm:flex items-center ml-auto mr-10">
-          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">
-            MAPA
-          </button>
-          <button onClick={logout} id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all ml-2">
-            CERRAR SESIÓN
-          </button>
+          <Link to="/login">
+            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all mx-4">INICIAR SESIÓN</button>
+          </Link>
+          <Link to="/register">
+            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all">REGISTRO</button>
+          </Link>
         </div>
 
         <div className={`fixed inset-0 bg-white bg-opacity-90 z-50 p-4 ${isOpen ? 'flex' : 'hidden'} flex-col items-center`}>
@@ -55,28 +50,22 @@ function Header() {
             </svg>
           </button>
 
-          <Link to="/home">
+          <Link to="/">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>INICIO</button>
-          </Link>
-          <Link to="/goals"> {/* Cambia "/goals" por la ruta correcta */}
-            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>METAS</button>
           </Link>
           <Link to="/AboutUs">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>NOSOTROS</button>
           </Link>
-          <Link to="/contact">
-            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>CONTACTANOS</button>
+          <Link to="/login">
+            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all mx-4" onClick={toggleMenu}>INICIAR SESIÓN</button>
           </Link>
-          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
-            MAPA
-          </button>
-          <button id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
-            CERRAR SESIÓN
-          </button>
+          <Link to="/register">
+            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all" onClick={toggleMenu}>REGISTRO</button>
+          </Link>
+
         </div>
       </header>
     </>
   );
 }
 
-export { Header };
