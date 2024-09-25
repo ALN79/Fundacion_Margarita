@@ -109,8 +109,10 @@ const transporter = nodemailer.createTransport({
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-  
+
+//Envia el correo para recuperar contraseña
   export const resetPasswordCtrl = async (req, res) => {
+
     const { emailRecover } = req.body;
     
     const connection = await ConnectionDataBase()
@@ -118,9 +120,11 @@ const transporter = nodemailer.createTransport({
     try {
       // Verifica si el correo existe en la base de datos
       const [user] = await connection.query('SELECT * FROM usuario WHERE email = ?', [emailRecover]);
+      console.log(user[0])
       if (!user) {
         return res.status(400).json({ message: 'Usuario no encontrado' });
       }
+
   
       // Genera un token aleatorio
       const token = crypto.randomBytes(20).toString('hex');
@@ -150,7 +154,8 @@ const transporter = nodemailer.createTransport({
       res.status(500).json({ message: 'Error al procesar la solicitud', error: err.message });
     }
   };
-  
+
+//Cambia la contraseña
   export const updatePasswordCtrl = async (req, res) => {
     const { token, newPassword } = req.body;
     
@@ -181,6 +186,7 @@ const transporter = nodemailer.createTransport({
     }
   };
 
+//Envia el mensaje de contacto al correo de la fundación
   export const FormContactCtrl = async (req, res) => {
     // Desestructuración del cuerpo de la solicitud
     const { name, email, subject, message } = req.body;
