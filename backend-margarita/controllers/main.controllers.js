@@ -142,10 +142,27 @@ const transporter = nodemailer.createTransport({
         to: emailRecover,
         from: process.env.EMAIL_USER,
         subject: 'Restablecer Contraseña',
-        text: `Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:\n\n
-          http://${req.headers.host}/reset/${token}\n\n
-          Si no solicitaste este correo, simplemente ignóralo y no se hará ningún cambio.\n`,
-      };
+        html: `
+            <div style="font-family: Arial, sans-serif; padding: 16px; background-color: #fefce8; border-radius: 8px; border: 1px solid #FFFF00; max-width: 600px; margin: 0 auto; text-align: center;">
+                <img src="https://i.pinimg.com/originals/11/94/c7/1194c7e6b8da26afee2a502f0e004e8f.png" alt="Margarita" style="width: 100px; height: auto; margin-bottom: 20px;" />
+                <h2 style="font-size: 24px; color: #fcd34d; margin-bottom: 20px;">Restablecer Contraseña</h2>
+                <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <p style="font-size: 18px; color: #000000;">Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:</p>
+                    <p style="text-align: center; margin-top: 20px;">
+                        <a href="http://${req.headers.host}/reset/${token}" style="font-size: 18px; color: #ffffff; background-color: #fcd34d; padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                            Restablecer Contraseña
+                        </a>
+                    </p>
+                    <p style="font-size: 16px; color: #000000; margin-top: 20px;">Si no solicitaste este correo, simplemente ignóralo y no se hará ningún cambio.</p>
+                </div>
+                <footer style="text-align: center; font-size: 14px; color: #fcd34d; margin-top: 20px;">
+                    <p>Este es un correo automático, por favor no respondas.</p>
+                </footer>
+            </div>
+        `,
+    };
+    
+    
   
       // Envía el correo
       await transporter.sendMail(mailOptions);
@@ -207,17 +224,27 @@ const transporter = nodemailer.createTransport({
 
     // Configurar el contenido del correo
     const mailOptions = {
-        from: email, // Email del remitente
-        to: 'fundacionmargarita24@gmail.com', // Tu correo donde recibirás la consulta
-        subject: `Consulta de ${name}`,
-        text: `
-            Nombre: ${name}
-            Email: ${email}
-            Asunto: ${subject}
-            Mensaje: ${message}
-        `,
-    };
-
+      from: email, // Email del remitente
+      to: 'fundacionmargarita24@gmail.com', // Tu correo donde recibirás la consulta
+      subject: `Consulta de ${name}`,
+      html: `
+          <div style="font-family: Arial, sans-serif; padding: 16px; background-color: #fefce8; border-radius: 8px; border: 1px solid #FFFF00; max-width: 600px; margin: 0 auto; text-align: center;">
+              <img src="https://i.pinimg.com/originals/11/94/c7/1194c7e6b8da26afee2a502f0e004e8f.png" alt="Margarita" style="width: 100px; height: auto; margin-bottom: 20px;" />
+              <h2 style="font-size: 24px; color: #fcd34d; margin-bottom: 20px;">Consulta Recibida</h2>
+              <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                  <p style="font-size: 18px; color: #000000;"><strong>Nombre:</strong> ${name}</p>
+                  <p style="font-size: 18px; color: #000000;"><strong>Email:</strong> ${email}</p>
+                  <p style="font-size: 18px; color: #000000;"><strong>Asunto:</strong> ${subject}</p>
+                  <p style="font-size: 18px; color: #000000;"><strong>Mensaje:</strong></p>
+                  <p style="font-size: 16px; color: #000000;">${message}</p>
+              </div>
+              <footer style="font-size: 14px; color: #fcd34d; margin-top: 20px;">
+                  <p>Consulta recibida a través del sitio web de la fundación.</p>
+              </footer>
+          </div>
+      `,
+  };
+  
     try {
         // Enviar el correo
         await transporter.sendMail(mailOptions);
