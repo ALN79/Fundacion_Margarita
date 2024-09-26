@@ -21,7 +21,7 @@ export function NoSessionPage() {
                     </div>
                 </div>
 
-                <div className="absolute top-0 right-0 flex justify-end items-center h-full pointer-events-none z-20 hidden md:flex">
+                <div className="absolute top-0 right-0 flex justify-end items-center h-full pointer-events-none z-20 md:flex">
                     <img
                         src="img/FlorNoSession.svg"
                         alt="Flor decorativa"

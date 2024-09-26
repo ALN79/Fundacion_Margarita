@@ -120,19 +120,16 @@ const transporter = nodemailer.createTransport({
     try {
       // Verifica si el correo existe en la base de datos
       const [user] = await connection.query('SELECT * FROM usuario WHERE email = ?', [emailRecover]);
-      console.log(user[0])
       if (!user) {
         return res.status(400).json({ message: 'Usuario no encontrado' });
       }
 
-  
       // Genera un token aleatorio
       const token = crypto.randomBytes(20).toString('hex');
   
       // Establece una fecha de expiración (ej: 1 hora)
       const expirationDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
       const formattedExpirationDate = expirationDate.toISOString().slice(0, 19).replace('T', ' '); //Formatea el horario para mySQL
-      console.log(formattedExpirationDate)
   
       // Actualiza el token y la fecha de expiración en la base de datos
       await connection.query('UPDATE usuario SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?', 
@@ -149,7 +146,7 @@ const transporter = nodemailer.createTransport({
                 <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <p style="font-size: 18px; color: #000000;">Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:</p>
                     <p style="text-align: center; margin-top: 20px;">
-                        <a href="http://${req.headers.host}/reset/${token}" style="font-size: 18px; color: #ffffff; background-color: #fcd34d; padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+                        <a href="http://localhost:5173/reset/${token}" style="font-size: 18px; color: #ffffff; background-color: #fcd34d; padding: 10px 20px; border-radius: 8px; text-decoration: none;">
                             Restablecer Contraseña
                         </a>
                     </p>
@@ -166,7 +163,7 @@ const transporter = nodemailer.createTransport({
   
       // Envía el correo
       await transporter.sendMail(mailOptions);
-      res.status(200).json({ message: 'Correo enviado para restablecer la contraseña' });
+      res.status(200).json({ message: 'Correo enviado para restablecer la contraseña', token: token  })
     } catch (err) {
       res.status(500).json({ message: 'Error al procesar la solicitud', error: err.message });
     }
@@ -174,7 +171,7 @@ const transporter = nodemailer.createTransport({
 
 //Cambia la contraseña
   export const updatePasswordCtrl = async (req, res) => {
-    const { token, newPassword } = req.body;
+    const { token, passwordUpdate } = req.body;
     
     const connection = await ConnectionDataBase()
 
@@ -191,7 +188,7 @@ const transporter = nodemailer.createTransport({
   
       // Genera un salt y hashea la nueva contraseña
       const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+      const hashedPassword = await bcrypt.hash(passwordUpdate, saltRounds);
   
       // Actualiza la contraseña en la base de datos y elimina el token
       const query = await connection.query('UPDATE usuario SET contraseña = ?, reset_password_token = NULL, reset_password_expires = NULL WHERE id_usuario = ?', 

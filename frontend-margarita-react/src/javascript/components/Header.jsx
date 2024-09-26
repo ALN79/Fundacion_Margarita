@@ -58,7 +58,7 @@ function Header() {
           <Link to="/home">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>INICIO</button>
           </Link>
-          <Link to="/goals"> {/* Cambia "/goals" por la ruta correcta */}
+          <Link to="/goals"> 
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>METAS</button>
           </Link>
           <Link to="/AboutUs">
@@ -67,10 +67,10 @@ function Header() {
           <Link to="/contact">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>CONTACTANOS</button>
           </Link>
-          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
+          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all my-4">
             MAPA
           </button>
-          <button id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all mt-4">
+          <button id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">
             CERRAR SESIÓN
           </button>
         </div>

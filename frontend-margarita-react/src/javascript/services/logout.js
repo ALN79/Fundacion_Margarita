@@ -14,6 +14,7 @@ export const logout = async (e) => {
                 console.error('Error al cerrar sesión');
             }
     } catch (error) {
+        alert("Error inesperado, intente de nuevo mas tarde")
         console.error('Error en la solicitud de logout', error);
     }
 }

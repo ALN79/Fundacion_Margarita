@@ -12,9 +12,9 @@ export const sendContact = async (e) => {
   }
 
   //Carga del boton del formulario
-  const submitButton = document.getElementById("button-contact")
-  submitButton.disabled = true
-  submitButton.innerHTML = `
+  const submitButtonContact = document.getElementById("button-contact")
+  submitButtonContact.disabled = true
+  submitButtonContact.innerHTML = `
   <img src="img/loadingImage.png" alt="" width="90" height="90" class="animate-spin -my-7" />
   `
 
@@ -36,12 +36,13 @@ export const sendContact = async (e) => {
       e.target.reset()
     }
   } catch (error) {
+    alert("Error inesperado, intente de nuevo mas tarde")
     console.error('Hubo un problema con el envío:', error);
     throw error;
   }
   finally{
     //Devuelve el boton del formulario a su estado original
-    submitButton.disabled = false
-    submitButton.innerHTML = "Enviar Mensaje"
+    submitButtonContact.disabled = false
+    submitButtonContact.innerHTML = "Enviar Mensaje"
   }
 };
