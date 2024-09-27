@@ -183,7 +183,7 @@ const transporter = nodemailer.createTransport({
         [token, dateNow]);
 
       if (user.length === 0) {
-        return res.status(400).json({ message: 'Token inválido o expirado' });
+        return res.status(400).json({ message: 'Error al recuperar la contraseña' });
       }
   
       // Genera un salt y hashea la nueva contraseña

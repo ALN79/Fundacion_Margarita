@@ -14,7 +14,7 @@ function Header() {
       <header className="font-sans flex flex-row items-center bg-white border-y border-black h-28 relative">
         <div className="flex items-center bg-slate-400 w-full sm:w-auto p-4">
           <Link to="/home">
-          <img src="img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
+          <img src="/img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
           </Link>
         </div>
 
