@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {logout} from "../services/logout.js"
+import {logout} from "../services/services.users/logout.js"
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ function Header() {
             <button className="font-medium hover:font-semibold transition-all mx-2">INICIO</button>
           </Link>
           <Link to="/goals">
-            <button className="font-medium hover:font-semibold transition-all mx-2">METAS</button>
+            <button className="font-medium hover:font-semibold transition-all mx-2">CAUSAS</button>
           </Link>
           <Link to="/AboutUs">
             <button className="font-medium hover:font-semibold transition-all mx-2">NOSOTROS</button>
@@ -59,7 +59,7 @@ function Header() {
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>INICIO</button>
           </Link>
           <Link to="/goals"> 
-            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>METAS</button>
+            <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>CAUSAS</button>
           </Link>
           <Link to="/AboutUs">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>NOSOTROS</button>

@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { motion } from "framer-motion";
 import { Footer } from "../components/footer";
 import { NoSessionHeader } from "../components/NoSessionHeader";
-import { authUser } from "../services/authUser";
+import { authUser } from "../services/services.users/authUser";
 import { LoadingPage } from "./loadingPage";
 
 export function AboutUsPage() {

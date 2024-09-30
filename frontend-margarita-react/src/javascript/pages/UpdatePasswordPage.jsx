@@ -1,7 +1,7 @@
 import React from 'react'
 import { NoSessionHeader } from '../components/NoSessionHeader'
 import { useParams } from 'react-router-dom'
-import {updatePassword} from "../services/updatePassword.js"
+import {updatePassword} from "../services/services.users/updatePassword.js"
 
 export function UpdatePasswordPage() {
 

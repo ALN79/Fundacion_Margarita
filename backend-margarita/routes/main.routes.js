@@ -1,12 +1,7 @@
 import { Router } from "express";
 
-import { registerUsersCtrl } from "../controllers/main.controllers.js";
-import { loginUsersCtrl } from "../controllers/main.controllers.js";
-import { logoutUsersCtrl } from "../controllers/main.controllers.js";
-import { resetPasswordCtrl } from "../controllers/main.controllers.js";
-import { updatePasswordCtrl } from "../controllers/main.controllers.js"
-import { FormContactCtrl } from "../controllers/main.controllers.js";
-import { checkAuthCtrl } from "../controllers/main.controllers.js";
+import { registerUsersCtrl, loginUsersCtrl, logoutUsersCtrl, resetPasswordCtrl, updatePasswordCtrl, checkAuthCtrl, FormContactCtrl } from "../controllers/main.controllers.js";
+
 import { authenticateJWTCtrl } from "../helpers/authenticateJWT.js";
 
 const router = Router();

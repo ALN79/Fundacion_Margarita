@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { authUser } from "./javascript/services/authUser.js"
+import { authUser } from "./javascript/services/services.users/authUser.js"
 import { LandingPage } from './javascript/pages/LandingPage';
 import { LoginPage } from './javascript/pages/LoginPage';
 import { RegisterPage } from './javascript/pages/RegisterPage';
@@ -9,6 +9,7 @@ import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
+import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -47,9 +48,13 @@ function App() {
         <Route path="/aboutUs"
           element = {<AboutUsPage/>}
         />
+        <Route path="/goals"
+          element = {<GoalsPage/>}
+        />
         <Route path="/"
           element = {<NoSessionPage/>}
         />
+
       </Routes>
     </Router>
   );

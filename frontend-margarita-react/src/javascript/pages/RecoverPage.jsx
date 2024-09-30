@@ -1,4 +1,4 @@
-import { recover } from "../services/recover";
+import { recover } from "../services/services.users/recover";
 import { NoSessionHeader } from "../components/NoSessionHeader";
 
 export function RecoverPage() {
