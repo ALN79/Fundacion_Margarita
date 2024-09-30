@@ -254,3 +254,106 @@ const transporter = nodemailer.createTransport({
         res.status(500).send('Error al enviar el correo');
     }
 };
+
+export const getBinanceAccount = async (req, res) => {
+  const apiKey = '1r4Y96b5OtQkBFMS7ByanQCdPkzopyFjzLia4Aa94J1UB92BWaDka5TTCeo3iU9L';
+const apiSecret = '3Q6LeFHd42mmmslqtAxuT64yaOv5PNNwLZU2yuE3KNZQu39pRcxkvmMIOoQ7QlYR';
+const baseURL = 'https://testnet.binance.vision';
+  try {
+    const timestamp = Date.now();
+
+    // Crear la query string con el timestamp
+    const queryString = `timestamp=${timestamp}`;
+  
+    // Generar la firma HMAC SHA256 utilizando la API secret
+    const signature = crypto.createHmac('sha256', apiSecret)
+      .update(queryString)
+      .digest('hex');
+  
+    // Construir la URL final con la firma
+    const url = `${baseURL}/api/v3/account?${queryString}&signature=${signature}`;
+  
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'X-MBX-APIKEY': apiKey, // Enviar la API key en los headers
+        },
+      });
+  
+      // Verificar si la respuesta fue exitosa
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+export const transferBinance = async (req, res) => {
+  const apiKey = '1r4Y96b5OtQkBFMS7ByanQCdPkzopyFjzLia4Aa94J1UB92BWaDka5TTCeo3iU9L';
+  const apiSecret = '3Q6LeFHd42mmmslqtAxuT64yaOv5PNNwLZU2yuE3KNZQu39pRcxkvmMIOoQ7QlYR';
+  const baseURL = 'https://testnet.binance.vision';
+  const { amount, cryptoSymbol } = req.body;
+
+  if (!amount || !cryptoSymbol) {
+      return res.status(400).json({ error: 'Missing amount or cryptoSymbol' });
+  }
+
+  try {
+      const endpoint = '/sapi/v1/vip/transfer';
+      const timestamp = Date.now();
+      const queryString = `timestamp=${timestamp}`;
+
+      // Generar la firma HMAC SHA256
+      const signature = crypto.createHmac('sha256', apiSecret)
+          .update(queryString)
+          .digest('hex');
+
+      const url = `${baseURL}${endpoint}?${queryString}&signature=${signature}`;
+
+      const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+              'X-MBX-APIKEY': apiKey,
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              amount: amount,
+              asset: cryptoSymbol,
+              type: 1, // Tipo de transferencia
+          }),
+      });
+
+      // Imprimir la respuesta como texto antes de intentar parsearla como JSON
+      const responseText = await response.text();
+      console.log('Response Text:', responseText);
+
+      // Verificar si la respuesta es HTML en lugar de JSON
+      if (responseText.startsWith('<')) {
+          console.error('Recibido HTML en lugar de JSON. Verifica el endpoint y la API key.');
+          return res.status(500).json({ error: 'Recibido HTML en lugar de JSON. Verifica el endpoint y la API key.' });
+      }
+
+      // Si no es HTML, parsear la respuesta como JSON
+      const data = JSON.parse(responseText);
+
+      // Verificar si la respuesta fue exitosa
+      if (!response.ok) {
+          console.error('Error en la respuesta de Binance:', data);
+          return res.status(response.status).json(data);
+      }
+
+      // Responder con la información de la transferencia
+      res.json(data);
+  } catch (error) {
+      console.error('Error al realizar la transferencia:', error);
+      res.status(500).json({ error: 'Error al realizar la transferencia' });
+  }
+};
