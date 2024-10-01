@@ -5,7 +5,7 @@ import { HiEnvelope } from "react-icons/hi2";
 import { FaTshirt, FaBreadSlice, FaDonate, FaBitcoin, FaShareAlt } from "react-icons/fa"; // Íconos
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { sendContact } from "../services/services.users/formContact.js";
+import { sendContact } from "../services/services.contact/formContact.js";
 
 
 function ContactPage() {

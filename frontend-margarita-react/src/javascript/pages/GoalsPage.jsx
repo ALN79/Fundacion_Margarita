@@ -5,6 +5,7 @@ import { CardGoals } from '../components/CardGoals';
 import { QuotesGoals } from '../components/QuotesGoals';
 
 export function GoalsPage() {
+
     return (
         <div className="min-h-screen">
             <Header />
