@@ -4,7 +4,7 @@ export const login = async (e) => {
 
     //Guarda los datos del formulario de login
     const emailLogin = document.getElementById("emailLogin").value.trim()
-    const passwordLogin = document.getElementById("passwordLogin").value.trim()
+    const passwordLogin = document.getElementById("passwordLogin").value
 
     if (!emailLogin || !passwordLogin) {
         return alert("Todos los campos son obligatorios");
@@ -30,6 +30,7 @@ export const login = async (e) => {
             window.location.href = "/home"
         }
     } catch (error) {
+        alert("Error inesperado, intente de nuevo mas tarde")
         console.error("ERROR AL INICIAR SESIÓN",error)
     }
 }

@@ -14,7 +14,7 @@ export const authJWT = async () => {
         return false
     //Manejo de errores
     } catch (error) {
-        alert("Error al autenticar el usuario", error)
+        alert("Error inesperado, intente de nuevo mas tarde")
         return false
     }
 }

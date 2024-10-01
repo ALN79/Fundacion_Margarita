@@ -13,7 +13,7 @@ export function NoSessionHeader() {
       <header className="font-sans flex flex-row items-center bg-white border-y border-black h-28 relative">
         <div className="flex items-center bg-slate-400 w-full sm:w-auto p-4">
           <Link to="/">
-          <img src="img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
+          <img src="/img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
           </Link>
         </div>
 
@@ -57,7 +57,7 @@ export function NoSessionHeader() {
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>NOSOTROS</button>
           </Link>
           <Link to="/login">
-            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all mx-4" onClick={toggleMenu}>INICIAR SESIÓN</button>
+            <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all my-4" onClick={toggleMenu}>INICIAR SESIÓN</button>
           </Link>
           <Link to="/register">
             <button className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all" onClick={toggleMenu}>REGISTRO</button>

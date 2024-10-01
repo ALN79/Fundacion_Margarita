@@ -18,7 +18,7 @@ export function LoginPage() {
                     <input className="border border-black p-3 min-w-80" placeholder="******" type="password" id="passwordLogin" />
                     
                     <Link to="/register">
-                    <p className="text-center mt-5 font-normal">No tienes una cuenta? <a href="/register" className="text-yellow-400 hover:text-yellow-500 transition-colors">Regístrate</a></p>
+                    <p className="text-center mt-5 font-normal">No tienes una cuenta? <p className="text-yellow-400 hover:text-yellow-500 transition-colors">Regístrate</p></p>
                     </Link>
 
                     <Link to="/recover">

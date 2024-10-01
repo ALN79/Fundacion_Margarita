@@ -9,6 +9,7 @@ import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
 import { Binance } from './javascript/pages/binance.jsx';
+import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -34,6 +35,9 @@ function App() {
         />
         <Route path="/recover"
           element={user ? <Navigate to={"/home"} /> : <RecoverPage />}
+        />
+        <Route path="/reset/:token"
+          element={user ? <Navigate to={"/home"} /> : <UpdatePasswordPage/>}
         />
         <Route path="/home"
           element={user ? <LandingPage /> : <Navigate to={"/login"} />}

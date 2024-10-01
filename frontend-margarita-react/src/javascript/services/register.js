@@ -6,7 +6,7 @@ export const register = async (e) => {
     const name = document.getElementById("name").value.trim()
     const surname = document.getElementById("surname").value.trim()
     const email = document.getElementById("email").value.trim()
-    const password = document.getElementById("password").value.trim()
+    const password = document.getElementById("password").value
 
     //Valida que todos los campos esten completos
     if (!name || !surname || !email || !password) {
@@ -32,7 +32,7 @@ export const register = async (e) => {
         }
         
     } catch (error) {
+        alert("Error inesperado, intente de nuevo mas tarde")
         console.error("Error Inesperado")
-        alert("Ocurrio un error inesperado, intente más tarde", error)
     }
 }
