@@ -9,7 +9,7 @@ import { FormContactCtrl } from "../controllers/main.controllers.js";
 import { checkAuthCtrl } from "../controllers/main.controllers.js";
 import { authenticateJWTCtrl } from "../helpers/authenticateJWT.js";
 import { getBinanceAccount } from "../controllers/main.controllers.js";
-import { transferBinance } from "../controllers/main.controllers.js";
+import { simulateBinanceTransfer } from "../controllers/main.controllers.js";
 
 const router = Router();
 
@@ -21,6 +21,6 @@ router.post('/update-password', updatePasswordCtrl)
 router.get("/authenticate-jwt", authenticateJWTCtrl, checkAuthCtrl)
 router.post("/send-contact", FormContactCtrl);
 router.get("/binance", getBinanceAccount);
-router.post("/transfer-binance", transferBinance);
+router.post("/transfer-binance", simulateBinanceTransfer);
 
 export {router};

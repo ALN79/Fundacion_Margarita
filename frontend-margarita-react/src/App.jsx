@@ -8,6 +8,7 @@ import { ContactPage } from './javascript/pages/ContactPage';
 import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
+import { Binance } from './javascript/pages/binance.jsx';
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -39,6 +40,9 @@ function App() {
         />
         <Route path="/contact"
           element={user ? <ContactPage /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/binance"
+          element={user ? <Binance /> : <Navigate to={"/login"} />}
         />
         <Route path="/aboutUs"
           element = {<AboutUsPage/>}
