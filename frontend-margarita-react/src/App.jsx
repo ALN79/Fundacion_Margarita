@@ -8,6 +8,7 @@ import { ContactPage } from './javascript/pages/ContactPage';
 import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
+import { Binance } from './javascript/pages/binance.jsx';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
 import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
@@ -54,6 +55,9 @@ function App() {
           element={user ? <UploadGoalsPage /> : <Navigate to={"/login"} />}
         />
 
+        <Route path="/binance"
+          element={user ? <Binance /> : <Navigate to={"/login"} />}
+        />
         <Route path="/aboutUs"
           element = {<AboutUsPage/>}
         />

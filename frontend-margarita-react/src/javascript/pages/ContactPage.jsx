@@ -1,5 +1,5 @@
 import { Header } from "../components/Header.jsx";
-import { Footer } from "../components/footer.jsx";
+import { Footer } from "../components/Footer.jsx";
 import { Label, TextInput, Textarea, Button } from "flowbite-react";
 import { HiEnvelope } from "react-icons/hi2";
 import { FaTshirt, FaBreadSlice, FaDonate, FaBitcoin, FaShareAlt } from "react-icons/fa"; // Íconos

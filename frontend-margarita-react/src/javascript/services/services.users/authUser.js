@@ -20,7 +20,9 @@ export const authUser = () => {
         }
         //Ejecuta la funcion
         checkAuth()
+
     }, []);
     //Retorna los valores dentro de user y loading
     return {user, loading}
 };
+
