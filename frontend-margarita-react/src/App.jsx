@@ -10,6 +10,8 @@ import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
+import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
+
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -45,11 +47,15 @@ function App() {
         <Route path="/contact"
           element={user ? <ContactPage /> : <Navigate to={"/login"} />}
         />
+        <Route path="/goals"
+          element={user ? <GoalsPage /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/upload-goals"
+          element={user ? <UploadGoalsPage /> : <Navigate to={"/login"} />}
+        />
+
         <Route path="/aboutUs"
           element = {<AboutUsPage/>}
-        />
-        <Route path="/goals"
-          element = {<GoalsPage/>}
         />
         <Route path="/"
           element = {<NoSessionPage/>}
