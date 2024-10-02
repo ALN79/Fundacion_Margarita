@@ -1,4 +1,4 @@
-import { recover } from "../services/services.users/recover";
+import { recoverPassword } from "../services/services.users/recoverPassword.js";
 import { NoSessionHeader } from "../components/NoSessionHeader";
 
 export function RecoverPage() {
@@ -7,7 +7,7 @@ export function RecoverPage() {
             <NoSessionHeader />
             <div className="flex justify-center items-center">
                 <main>
-                    <form id="formRecover" action="" className="flex flex-col" onSubmit={recover}>
+                    <form id="formRecover" action="" className="flex flex-col" onSubmit={recoverPassword}>
                         <p className="text-4xl text-center font-bold mb-5 mt-32">Recuperar cuenta</p>
                         <p className="text-center mb-5 font-medium">Ingresa tu correo electrónico</p>
 

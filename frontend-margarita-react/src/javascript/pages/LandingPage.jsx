@@ -13,7 +13,7 @@ export function LandingPage() {
   const [user, setUser] = useState(null);
 
   const apiKey = "d91c443745374cf4b666da7a29e1695d";
-  const query = "donaciones ";
+  const query = "ayuda humanitaria";
 
   // Calcula el número total de páginas
   const totalPages = Math.ceil(totalResults / pageSize);
