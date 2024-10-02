@@ -13,7 +13,12 @@ export function LandingPage() {
   const [user, setUser] = useState(null);
 
   const apiKey = "d91c443745374cf4b666da7a29e1695d";
-  const query = "donaciones ";
+  const query = "ayuda humanitaria ";
+
+  // Función para capitalizar la primera letra del nombre
+  const capitalizeFirstLetter = (name) => {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  };
 
   // Calcula el número total de páginas
   const totalPages = Math.ceil(totalResults / pageSize);
@@ -22,7 +27,8 @@ export function LandingPage() {
     const fetchUsername = async () => {
       try {
         const user = await authJWT();
-        setUser(user);
+        // Capitalizar el nombre del usuario
+        setUser({ ...user, username: capitalizeFirstLetter(user.username) });
       } catch (error) {
         console.error("Error al obtener el nombre del usuario", error);
       }
@@ -130,17 +136,12 @@ export function LandingPage() {
         )}
 
         <div className="w-full max-w-6xl mt-8 flex flex-col lg:flex-row gap-4">
-          {/* Sección de noticias a la izquierda */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {articles.length > 0 ? renderNews() : <p>Cargando noticias...</p>}
-          </div>
-
-          {/* Aside con tarjetas de contenido a la derecha */}
+          {/* Aside con tarjetas de contenido a la derecha en pantallas grandes, pero primero en móviles */}
           <motion.aside
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 50, duration: 0.8 }}
-            className="w-full lg:w-1/3 bg-white shadow-md p-4 rounded-lg"
+            className="w-full lg:w-1/3 bg-white shadow-md p-4 rounded-lg order-1 lg:order-2"
           >
             <div className="space-y-4">
               {/* Tarjeta 1 */}
@@ -204,6 +205,11 @@ export function LandingPage() {
               </div>
             </div>
           </motion.aside>
+
+          {/* Sección de noticias a la izquierda en pantallas grandes */}
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 order-2 lg:order-1">
+            {articles.length > 0 ? renderNews() : <p>Cargando noticias...</p>}
+          </div>
         </div>
 
         {/* Paginación */}
