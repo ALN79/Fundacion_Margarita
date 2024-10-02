@@ -9,6 +9,8 @@ import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
+import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
+
 function App() {
 
   //Desestructura user y loading del resultado de la función
@@ -49,6 +51,9 @@ function App() {
         />
         <Route path="/"
           element = {<NoSessionPage/>}
+        />
+                <Route path="/Profile"
+          element={user ? <ProfilePage /> : <Navigate to={"/login"} />}
         />
       </Routes>
     </Router>

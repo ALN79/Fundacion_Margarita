@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {logout} from "../services/logout.js"
+import { logout } from "../services/logout.js";
+import { authJWT } from "../services/authJWT.js";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState({ username: "" });
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const user = await authJWT();
+        const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+        setUser({ ...user, username: capitalizeFirstLetter(user.username) });
+      } catch (error) {
+        console.error("Error al obtener el nombre del usuario", error);
+      }
+    };
+    fetchUsername();
+  }, []);
+
+  const getInitials = (name) => {
+    return name
+      ? name
+          .split(" ")
+          .map((word) => word[0].toUpperCase())
+          .join("")
+      : "";
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,7 +38,7 @@ function Header() {
       <header className="font-sans flex flex-row items-center bg-white border-y border-black h-28 relative">
         <div className="flex items-center bg-slate-400 w-full sm:w-auto p-4">
           <Link to="/home">
-          <img src="/img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
+            <img src="/img/logoPagina.svg" alt="Logo" className="h-auto w-40" />
           </Link>
         </div>
 
@@ -46,7 +70,15 @@ function Header() {
           <button onClick={logout} id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all ml-2">
             CERRAR SESIÓN
           </button>
+
+          {/* Avatar with initials */}
+          <Link to="/profile">
+          <div  className="relative w-10 h-10 flex items-center justify-center bg-yellow-400 rounded-full text-white font-bold text-lg ml-4">
+            {getInitials(user.username)}
+          </div>
+          </Link> 
         </div>
+         
 
         <div className={`fixed inset-0 bg-white bg-opacity-90 z-50 p-4 ${isOpen ? 'flex' : 'hidden'} flex-col items-center`}>
           <button onClick={toggleMenu} className="self-end text-black text-2xl mb-4">
@@ -58,7 +90,7 @@ function Header() {
           <Link to="/home">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>INICIO</button>
           </Link>
-          <Link to="/goals"> 
+          <Link to="/goals">
             <button className="font-medium hover:font-semibold transition-all mb-4" onClick={toggleMenu}>METAS</button>
           </Link>
           <Link to="/AboutUs">

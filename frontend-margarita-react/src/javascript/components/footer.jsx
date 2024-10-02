@@ -41,9 +41,9 @@ export function Footer() {
 
         <FlowbiteFooter.Divider className="border-gray-400 mt-12 mb-6" />
         <div className="flex space-x-6 mt-0 justify-center">
-          <FlowbiteFooter.Icon href="#" icon={BsFacebook} />
-          <FlowbiteFooter.Icon href="#" icon={BsInstagram} />
-          <FlowbiteFooter.Icon href="#" icon={BsTwitter} />
+          <FlowbiteFooter.Icon href="#" className="hover:text-blue-600" icon={BsFacebook} />
+          <FlowbiteFooter.Icon href="#"className="hover:text-violet-600"  icon={BsInstagram} />
+          <FlowbiteFooter.Icon href="#"className="hover:text-blue-400" icon={BsTwitter} />
         </div>
 
         <div className="w-full sm:flex sm:items-center sm:justify-center mt-4">
