@@ -12,6 +12,7 @@ import { Binance } from './javascript/pages/binance.jsx';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
 import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
+import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
 
 function App() {
 
@@ -64,7 +65,9 @@ function App() {
         <Route path="/"
           element = {<NoSessionPage/>}
         />
-
+          <Route path="/Profile"
+          element={user ? <ProfilePage /> : <Navigate to={"/login"} />}
+        />
       </Routes>
     </Router>
   );
