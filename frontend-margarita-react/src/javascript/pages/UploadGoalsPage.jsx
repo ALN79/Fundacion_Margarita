@@ -99,10 +99,10 @@ export function UploadGoalsPage() {
                 <motion.div className="bg-yellow-400 shadow-lg p-4 md:p-8 flex justify-center">
                     <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-start md:items-end">
                         <div className="flex flex-col w-full md:w-auto">
-                            <label htmlFor="number-input" className="block mb-2 text-sm font-medium text-white">Monto a recaudar</label>
+                            <label htmlFor="number-goal" className="block mb-2 text-sm font-medium text-white">Monto a recaudar</label>
                             <input
                                 type="number"
-                                id="number-input"
+                                id="amount-goal"
                                 className="border border-black rounded-md bg-white w-full md:w-32 p-2"
                                 placeholder="$1000"
                                 required
@@ -115,13 +115,14 @@ export function UploadGoalsPage() {
                                 ¿Qué necesitas?
                             </label>
                             <select
-                                id="dropdown"
+                                id="type-goal"
                                 className="block w-full md:w-40 px-3 py-2 border border-black bg-white rounded-md shadow-sm"
                             >
                                 <option value="opcion1">Dinero</option>
                                 <option value="opcion2">Ropa</option>
-                                <option value="opcion3">Comida</option>
+                                <option value="opcion3">Mercaderia</option>
                                 <option value="opcion4">Muebles</option>
+                                <option value="opcion5">Juguetes</option>
                             </select>
                         </div>
 
@@ -136,7 +137,7 @@ export function UploadGoalsPage() {
                         </div>
 
                         <div className="flex flex-col w-full md:w-auto">
-                            <label htmlFor="phone-input" className="block mb-2 text-sm font-medium text-white">Teléfono:</label>
+                            <label htmlFor="number-goal" className="block mb-2 text-sm font-medium text-white">Teléfono:</label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                                     <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
@@ -145,7 +146,7 @@ export function UploadGoalsPage() {
                                 </div>
                                 <input
                                     type="tel"
-                                    id="phone-input"
+                                    id="number-goal"
                                     className="bg-gray-50 border border-black text-black text-sm rounded-lg block w-full ps-10 p-2.5"
                                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                     placeholder="123-456-7890"

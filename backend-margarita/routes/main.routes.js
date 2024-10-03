@@ -6,7 +6,7 @@ import { authenticateJWTCtrl } from "../helpers/authenticateJWT.js";
 import { getBinanceAccount } from "../controllers/main.controllers.js";
 import { simulateBinanceTransfer } from "../controllers/main.controllers.js";
 
-import { getInfoQuoteCtrl } from "../controllers/goals.controllers.js";
+import { getInfoQuoteCtrl, uploadGoalsCtrl } from "../controllers/goals.controllers.js";
 
 const router = Router();
 
@@ -22,5 +22,6 @@ router.get("/binance", getBinanceAccount);
 router.post("/transfer-binance", simulateBinanceTransfer);
 
 router.get("/quotes-info", getInfoQuoteCtrl)
+router.post("/upload-goals", uploadGoalsCtrl)
 
 export {router};
