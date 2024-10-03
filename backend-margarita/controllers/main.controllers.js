@@ -116,6 +116,7 @@ export const loginUsersCtrl = async (req, res) => {
 
 //Verifica si el token es valido. Este controlador usa el middleware: auhtenticateJWT
 export const checkAuthCtrl = (req, res) => {
+  res.set('Cache-Control', 'no-store'); //Evita que el navegador guarde la respuesta en cache
   res.status(200).json({ user: req.user });
   console.log(req.user);
 };

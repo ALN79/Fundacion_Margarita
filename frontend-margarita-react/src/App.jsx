@@ -18,7 +18,6 @@ function App() {
 
   //Desestructura user y loading del resultado de la función
   const { user, loading } = authUser()
-
   //Mientras espera la función asincrona, renderiza la pantalla de carga
   if (loading) {
     return (
