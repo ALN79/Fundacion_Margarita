@@ -4,29 +4,40 @@ import { Header } from '../components/Header';
 function Binance() {
   const [accountData, setAccountData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // Estado para controlar la carga
 
-  useEffect(() => {
-    const fetchAccountData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/binance'); // Asegúrate de que esta ruta coincida con tu backend
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos de la cuenta');
-        }
-        const data = await response.json();
-        setAccountData(data.data); // Guarda solo los datos, no el mensaje
-      } catch (error) {
-        setError(error.message);
+  const fetchAccountData = async () => {
+    setLoading(true); // Establecer el estado de carga en verdadero
+    setError(null); // Reiniciar el error al iniciar la carga
+    try {
+      const response = await fetch('http://localhost:3000/binance'); // Asegúrate de que esta ruta coincida con tu backend
+      if (!response.ok) {
+        throw new Error('Error al obtener los datos de la cuenta');
       }
-    };
-
-    fetchAccountData();
-  }, []);
+      const data = await response.json();
+      setAccountData(data.data); // Guarda solo los datos, no el mensaje
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false); // Establecer el estado de carga en falso, independientemente del resultado
+    }
+  };
 
   return (
     <div className="bg-custom-bg-2 bg-cover h-screen flex flex-col">
       <Header />
+      <div className="flex justify-center items-center mt-4">
+        <button
+          onClick={fetchAccountData}
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Obtener Datos de Cuenta
+        </button>
+      </div>
       {error && <p className="text-red-500">{error}</p>}
-      {accountData ? (
+      {loading ? ( // Mostrar el estado de carga
+        <p>Cargando datos de la cuenta...</p>
+      ) : accountData ? (
         <div className="flex justify-center items-center mt-4">
           <div className="bg-yellow-200 bg-opacity-50 shadow-md rounded-lg overflow-hidden max-w-lg w-full">
             <h2 className="text-xl font-bold p-4 bg-yellow-300">Datos de la cuenta de Binance</h2>
@@ -67,9 +78,7 @@ function Binance() {
             </div>
           </div>
         </div>
-      ) : (
-        <p>Cargando datos de la cuenta...</p>
-      )}
+      ) : null}
     </div>
   );
 }
