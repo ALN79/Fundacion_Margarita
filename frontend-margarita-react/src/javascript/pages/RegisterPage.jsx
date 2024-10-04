@@ -1,4 +1,4 @@
-import {register} from "../services/register.js"
+import {register} from "../services/services.users/register.js"
 import { Link } from 'react-router-dom';
 import { NoSessionHeader } from "../components/NoSessionHeader";
 

@@ -1,4 +1,4 @@
-export const recover = async (e) => {
+export const recoverPassword = async (e) => {
 
     e.preventDefault()
 

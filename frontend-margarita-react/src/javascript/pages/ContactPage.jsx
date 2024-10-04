@@ -1,11 +1,11 @@
 import { Header } from "../components/Header.jsx";
-import { Footer } from "../components/footer.jsx";
+import { Footer } from "../components/Footer.jsx";
 import { Label, TextInput, Textarea, Button } from "flowbite-react";
 import { HiEnvelope } from "react-icons/hi2";
 import { FaTshirt, FaBreadSlice, FaDonate, FaBitcoin, FaShareAlt } from "react-icons/fa"; // Íconos
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { sendContact } from "../services/formContact.js";
+import { sendContact } from "../services/services.contact/formContact.js";
 
 
 function ContactPage() {

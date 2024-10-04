@@ -24,5 +24,4 @@ export const authUser = () => {
     }, []);
     //Retorna los valores dentro de user y loading
     return {user, loading}
-};
-
+}; 

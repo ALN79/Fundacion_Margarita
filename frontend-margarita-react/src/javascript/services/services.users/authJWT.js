@@ -11,7 +11,7 @@ export const authJWT = async () => {
             return data.user
         }
         //Sino retorna falso
-        return false
+        return null
     //Manejo de errores
     } catch (error) {
         alert("Error inesperado, intente de nuevo mas tarde")

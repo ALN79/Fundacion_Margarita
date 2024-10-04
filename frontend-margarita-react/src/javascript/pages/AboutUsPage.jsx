@@ -1,9 +1,9 @@
 import React from "react";
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
-import { Footer } from "../components/footer";
 import { NoSessionHeader } from "../components/NoSessionHeader";
-import { authUser } from "../services/authUser";
+import { authUser } from "../services/services.users/authUser";
 import { LoadingPage } from "./loadingPage";
 
 export function AboutUsPage() {

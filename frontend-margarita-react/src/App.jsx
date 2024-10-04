@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { authUser } from "./javascript/services/authUser.js"
+import { authUser } from "./javascript/services/services.users/authUser.js"
 import { LandingPage } from './javascript/pages/LandingPage';
 import { LoginPage } from './javascript/pages/LoginPage';
 import { RegisterPage } from './javascript/pages/RegisterPage';
@@ -10,11 +10,14 @@ import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
 import { Binance } from './javascript/pages/binance.jsx';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
+import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
+import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
+import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
+
 function App() {
 
   //Desestructura user y loading del resultado de la función
   const { user, loading } = authUser()
-
   //Mientras espera la función asincrona, renderiza la pantalla de carga
   if (loading) {
     return (
@@ -45,6 +48,13 @@ function App() {
         <Route path="/contact"
           element={user ? <ContactPage /> : <Navigate to={"/login"} />}
         />
+        <Route path="/goals"
+          element={user ? <GoalsPage /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/upload-goals"
+          element={user ? <UploadGoalsPage /> : <Navigate to={"/login"} />}
+        />
+
         <Route path="/binance"
           element={user ? <Binance /> : <Navigate to={"/login"} />}
         />
@@ -53,6 +63,9 @@ function App() {
         />
         <Route path="/"
           element = {<NoSessionPage/>}
+        />
+          <Route path="/Profile"
+          element={user ? <ProfilePage /> : <Navigate to={"/login"} />}
         />
       </Routes>
     </Router>
