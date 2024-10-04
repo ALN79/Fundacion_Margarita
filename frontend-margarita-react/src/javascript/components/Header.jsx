@@ -64,7 +64,7 @@ function Header() {
         </div>
 
         <div className="hidden sm:flex items-center ml-auto mr-10">
-          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all">
+          <button id="map" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-white hover:scale-95 transition-all">
             MAPA
           </button>
           <button onClick={logout} id="logout" className="whitespace-nowrap bg-yellow-400 w-40 text-center py-3 hover:bg-yellow-500 hover:text-red-700 hover:scale-95 transition-all ml-2">
