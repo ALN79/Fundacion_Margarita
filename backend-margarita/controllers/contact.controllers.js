@@ -1,3 +1,7 @@
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 //Envia el mensaje de contacto al correo de la fundación
 export const FormContactCtrl = async (req, res) => {
