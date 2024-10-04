@@ -22,6 +22,6 @@ router.get("/binance", getBinanceAccount);
 router.post("/transfer-binance", simulateBinanceTransfer);
 
 router.get("/quotes-info", getInfoQuoteCtrl)
-router.post("/upload-goals", uploadGoalsCtrl)
+router.post("/upload-goals", authenticateJWTCtrl, uploadGoalsCtrl)
 
 export {router};

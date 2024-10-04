@@ -29,20 +29,40 @@ export const getInfoQuoteCtrl = async (req,res) => {
 
 export const uploadGoalsCtrl = async (req, res) => {
     try {
-        const {titleGoal,descriptionGoal,numberContactGoal,emailContactGoal, typeGoal, amountGoal} = req.body;
+        const { titleGoal, descriptionGoal, numberContactGoal, emailContactGoal, typeGoal, amountGoal } = req.body;
         
-        const connection = await ConnectionDataBase()
+        console.log(req.body);
 
-        const [idGoal] = await connection.query("SELECT id_tipo_causa FROM tipo_causas WHERE tipo_causa = ?", [typeGoal])
+        const connection = await ConnectionDataBase();
 
-        await connection.query("INSERT INTO causas (id_tipo_causa, titulo_causa, descripcion, monto_recaudar, monto_recaudado,contact_tel_causa,contact_corr_causa, estado_causa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [IdtypeGoal,  titleGoal, descriptionGoal, amountGoal, 0, numberContactGoal, emailContactGoal, 0])
+        const user = req.user;
 
-        connection.end()
+        if (!user) {
+            return res.status(401).json({ message: "No autorizado" });
+        }
 
-        res.status(200).json({message: "Causa subida correctamente"})
+        const [idGoal] = await connection.query("SELECT id_tipo_causa FROM tipos_causa WHERE tipo_causa = ?", [typeGoal]);
+
+        if (idGoal.length === 0) {
+            return res.status(404).json({ message: "Tipo de causa no encontrado" });
+        }
+
+        const idTypeGoal = idGoal[0].id_tipo_causa;
+
+        // Si la meta no es "Dinero", amountGoal debe ser 0
+        const finalAmountGoal = typeGoal === 'Dinero' ? amountGoal : 0;
+
+        await connection.query(
+            "INSERT INTO causas (id_tipo_causa, id_usuario, titulo_causa, descripcion, monto_recaudar, monto_recaudado, contact_tel_causa, contact_corr_causa, estado_causa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+            [idTypeGoal, user.id, titleGoal, descriptionGoal, finalAmountGoal, 0, numberContactGoal, emailContactGoal, 0]
+        );
+
+        connection.end();
+
+        res.status(200).json({ message: "Causa subida correctamente" });
 
     } catch (error) {
         console.log("Error al subir las causas", error);
         res.status(500).json({ message: "Error al subir las causas" });
     }
-}
+};

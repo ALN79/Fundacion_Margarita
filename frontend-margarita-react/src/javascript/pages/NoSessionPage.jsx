@@ -25,10 +25,7 @@ export function NoSessionPage() {
                     <img
                         src="img/FlorNoSession.svg"
                         alt="Flor decorativa"
-                         className="hidden md:block w-10/12 h-auto object-cover"
-                       
-                       
-                       
+                        className="hidden md:block w-10/12 h-auto object-cover"         
                     />
                 </div>
             </div>

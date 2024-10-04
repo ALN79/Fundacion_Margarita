@@ -92,7 +92,7 @@ export const loginUsersCtrl = async (req, res) => {
       else {
         const token = jwt.sign(
           {
-            id: searchUser[0].id,
+            id: searchUser[0].id_usuario,
             email: searchUser[0].email,
             username: searchUser[0].nombre_us,
           },
@@ -300,8 +300,8 @@ export const getBinanceAccount = async (req, res) => {
 };
 
 export const simulateBinanceTransfer = async (req, res) => {
-  const apiKey = 'tu_api_key_testnet';
-  const apiSecret = 'tu_api_secret_testnet';
+  const apiKey = '1r4Y96b5OtQkBFMS7ByanQCdPkzopyFjzLia4Aa94J1UB92BWaDka5TTCeo3iU9L';
+  const apiSecret = '3Q6LeFHd42mmmslqtAxuT64yaOv5PNNwLZU2yuE3KNZQu39pRcxkvmMIOoQ7QlYR';
   const baseURL = 'https://testnet.binance.vision';
   const { amount, cryptoSymbol, fromAccountType, toAccountType } = req.body;
 
