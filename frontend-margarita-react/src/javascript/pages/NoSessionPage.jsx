@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { NoSessionHeader } from '../components/NoSessionHeader.jsx';
 import { motion } from 'framer-motion';
-import { Carousel } from "flowbite-react";
 import { FaChevronDown } from 'react-icons/fa';
-
+import { Carousel } from 'flowbite-react';
 
 export function NoSessionPage() {
+    const secondSectionRef = useRef(null);
+
+    const scrollToSecondSection = () => {
+        secondSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <div className='bg-custom-bg-2'>
             <NoSessionHeader />
@@ -31,6 +36,7 @@ export function NoSessionPage() {
                         initial={{ y: 0 }}
                         animate={{ y: [0, 10, 0] }}
                         transition={{ repeat: Infinity, duration: 1.5 }}
+                        onClick={scrollToSecondSection}
                     >
                         <FaChevronDown className="text-4xl text-yellow-400" />
                     </motion.div>
@@ -44,22 +50,22 @@ export function NoSessionPage() {
                         animate={{ x: 0 }}
                         transition={{ duration: 1, ease: "easeOut", type: "spring", stiffness: 40 }}
                     />
-                    <span className="absolute w-screen py-2 text-xl text-center font-bold text-white h-12 bg-yellow-400">La plataforma donde conectas con la ayuda humanitaria</span>
+                    <span className="absolute w-screen py-2 text-xl text-center font-semibold text-white h-12 bg-yellow-400">La plataforma donde conectas con la ayuda humanitaria</span>
                 </div>
-            </section>
-            <section className="w-full">
+            </section>  
+            <section ref={secondSectionRef} className="w-full">
                 <div className=" container mx-auto px-4 py-8">
                     <div className=" text-white grid grid-cols-1 md:grid-cols-3 gap-6">
-                        
+
                         <motion.div
                             className="bg-yellow-400 rounded-lg shadow-md p-6"
                             initial={{ x: -100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-xl font-semibold mb-4">Misión</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <h3 className="text-xl font-semibold mb-4">Enterate donde donar</h3>
+                            <p className='text-lg'>
+                                Recaudamos información sobre los lugares donde se puede donar, para que puedas ayudar a quienes más lo necesitan.
                             </p>
                         </motion.div>
 
@@ -69,9 +75,9 @@ export function NoSessionPage() {
                             whileInView={{ x: 0, opacity: 1 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-xl font-semibold mb-4">Visión</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <h3 className="text-xl font-semibold mb-4">Noticias y Eventos</h3>
+                            <p className='text-lg'>
+                                Enterate de las noticias referidas a la ayuda humanitaria y los eventos que se realizan en la provincia.
                             </p>
                         </motion.div>
 
@@ -79,11 +85,11 @@ export function NoSessionPage() {
                             className="bg-yellow-400 rounded-lg shadow-md p-6"
                             initial={{ x: -100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5}}
+                            transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-xl font-semibold mb-4">Valores</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <h3 className="text-xl font-semibold mb-4">Sube tu causa</h3>
+                            <p className='text-lg'>
+                                Si tienes alguna causa que quieres promover, puedes subirla a nuestra plataforma y así podrás llegar a más personas.
                             </p>
                         </motion.div>
                     </div>
