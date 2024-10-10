@@ -6,6 +6,7 @@ import { NoSessionHeader } from "../components/NoSessionHeader";
 import { authUser } from "../services/services.users/authUser";
 import { LoadingPage } from "./loadingPage";
 
+
 export function AboutUsPage() {
 
   const { user, loading } = authUser()
