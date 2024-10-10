@@ -151,7 +151,7 @@ export function LandingPage() {
           <motion.aside
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 50, duration: 0.8 }}
+            transition={{ type: "spring", stiffness: 30, duration: 0.8 }}
             className="w-full lg:w-1/3 bg-white shadow-md p-4 rounded-lg"
           >
             <div className="space-y-4">
@@ -182,7 +182,7 @@ export function LandingPage() {
                 </h3>
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
                 >
                   <p className="text-gray-600 mb-4 text-center">

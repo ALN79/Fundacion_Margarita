@@ -1,15 +1,14 @@
 import React from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import { motion } from 'framer-motion'
 
 export function OneGoalPage() {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <motion.div className="bg-yellow-400 flex justify-center shadow-lg">
+            <div className="bg-yellow-400 flex justify-center shadow-lg">
                 <h1 className="text-3xl md:text-5xl text-white p-4">SUBE TU CAUSA</h1>
-            </motion.div>
+            </div>
 
                 <div className='flex flex-col md:flex-row w-full md:items-center md:space-x-8 md:px-8 lg:px-16 py-8'>
                     <section className="flex items-center justify-center md:w-1/2">
@@ -25,7 +24,7 @@ export function OneGoalPage() {
                     </section>
                 </div>
 
-                <motion.div className="bg-yellow-400 shadow-lg p-4 md:p-8 flex justify-center">
+                <div className="bg-yellow-400 shadow-lg p-4 md:p-8 flex justify-center">
                     <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-start md:items-end">
                         <div className="flex flex-col w-full md:w-auto">
                             AAAAAAAAAAAAAAAA
@@ -44,7 +43,7 @@ export function OneGoalPage() {
                         </div>
 
                     </section>
-                </motion.div>
+                </div>
             <Footer />
         </div>
     )

@@ -44,7 +44,7 @@ export function UploadGoalsPage() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-custom-bg-2">
             <Header />
             <motion.div className="bg-yellow-400 flex justify-center shadow-lg">
                 <h1 className="text-3xl md:text-5xl text-white p-4">SUBE TU CAUSA</h1>
