@@ -13,6 +13,7 @@ import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
 import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
 import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
+import { OneGoalPage } from './javascript/pages/OneGoalPage.jsx';
 
 function App() {
 
@@ -54,7 +55,9 @@ function App() {
         <Route path="/upload-goals"
           element={user ? <UploadGoalsPage /> : <Navigate to={"/login"} />}
         />
-
+        <Route path="/goal/:id"
+          element={user ? <OneGoalPage /> : <Navigate to={"/login"} />}
+        />
         <Route path="/binance"
           element={user ? <Binance /> : <Navigate to={"/login"} />}
         />

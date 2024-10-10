@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { motion } from 'framer-motion'
+import { uploadGoals } from '../services/services.goals/uploadGoals.js'
 
 export function UploadGoalsPage() {
     const [previewUrl, setPreviewUrl] = useState(null);
     const [titleGoal, setTitleGoal] = useState("");
     const [descriptionGoal, setDescriptionGoal] = useState("");
+    const [selectedType, setSelectedType] = useState('Dinero');
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -37,18 +39,22 @@ export function UploadGoalsPage() {
         }
     };
 
+    const handleSelectChange = (e) => {
+        setSelectedType(e.target.value);
+    };
+
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-custom-bg-2">
             <Header />
             <motion.div className="bg-yellow-400 flex justify-center shadow-lg">
                 <h1 className="text-3xl md:text-5xl text-white p-4">SUBE TU CAUSA</h1>
             </motion.div>
 
-            <form action="" className='flex-grow'>
+            <form action="" className='flex-grow' onSubmit={uploadGoals}>
                 <div className='flex flex-col md:flex-row w-full md:items-center md:space-x-8 md:px-8 lg:px-16 py-8'>
                     <section className="flex items-center justify-center md:w-1/2">
-                        <label 
-                            htmlFor="dropzone-file-goal" 
+                        <label
+                            htmlFor="dropzone-file-goal"
                             className="flex flex-col items-center justify-center w-64 h-64 md:w-80 md:h-80 border-2 border-black hover:border-white border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-yellow-300 text-black hover:text-white hover:rounded-2xl transition-all overflow-hidden"
                             onDragOver={handleDragOver}
                             onDrop={handleDrop}
@@ -64,10 +70,10 @@ export function UploadGoalsPage() {
                                     <p className="text-xs">Sube la imagen que represente tu causa</p>
                                 </div>
                             )}
-                            <input 
-                                id="dropzone-file-goal" 
-                                type="file" 
-                                className="hidden" 
+                            <input
+                                id="dropzone-file-goal"
+                                type="file"
+                                className="hidden"
                                 onChange={handleFileChange}
                                 accept="image/*"
                             />
@@ -98,30 +104,34 @@ export function UploadGoalsPage() {
 
                 <motion.div className="bg-yellow-400 shadow-lg p-4 md:p-8 flex justify-center">
                     <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-start md:items-end">
-                        <div className="flex flex-col w-full md:w-auto">
-                            <label htmlFor="number-input" className="block mb-2 text-sm font-medium text-white">Monto a recaudar</label>
-                            <input
-                                type="number"
-                                id="number-input"
-                                className="border border-black rounded-md bg-white w-full md:w-32 p-2"
-                                placeholder="$1000"
-                                required
-                                min={0}
-                            />
-                        </div>
+                        {/* Monto a recaudar (solo visible si "Dinero" está seleccionado) */}
+                        {selectedType === "Dinero" && (
+                            <div className="flex flex-col w-full md:w-auto">
+                                <label htmlFor="number-goal" className="block mb-2 text-sm font-medium text-white">Monto a recaudar</label>
+                                <input
+                                    type="number"
+                                    id="amount-goal"
+                                    className="border border-black rounded-md bg-white w-full md:w-32 p-2"
+                                    placeholder="$1000"
+                                    required
+                                    min={0}
+                                />
+                            </div>
+                        )}
 
                         <div className="flex flex-col w-full md:w-auto">
-                            <label htmlFor="dropdown" className="block mb-2 text-sm font-medium text-white">
-                                ¿Qué necesitas?
-                            </label>
+                            <label htmlFor="type-goal" className="block mb-2 text-sm font-medium text-white">¿Qué necesitas?</label>
                             <select
-                                id="dropdown"
+                                id="type-goal"
+                                value={selectedType}
+                                onChange={handleSelectChange}
                                 className="block w-full md:w-40 px-3 py-2 border border-black bg-white rounded-md shadow-sm"
                             >
-                                <option value="opcion1">Dinero</option>
-                                <option value="opcion2">Ropa</option>
-                                <option value="opcion3">Comida</option>
-                                <option value="opcion4">Muebles</option>
+                                <option value="Dinero">Dinero</option>
+                                <option value="Ropa">Ropa</option>
+                                <option value="Mercaderia">Mercadería</option>
+                                <option value="Muebles">Muebles</option>
+                                <option value="Juguetes">Juguetes</option>
                             </select>
                         </div>
 
@@ -136,7 +146,7 @@ export function UploadGoalsPage() {
                         </div>
 
                         <div className="flex flex-col w-full md:w-auto">
-                            <label htmlFor="phone-input" className="block mb-2 text-sm font-medium text-white">Teléfono:</label>
+                            <label htmlFor="number-goal" className="block mb-2 text-sm font-medium text-white">Teléfono:</label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                                     <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
@@ -145,7 +155,7 @@ export function UploadGoalsPage() {
                                 </div>
                                 <input
                                     type="tel"
-                                    id="phone-input"
+                                    id="number-goal"
                                     className="bg-gray-50 border border-black text-black text-sm rounded-lg block w-full ps-10 p-2.5"
                                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                     placeholder="123-456-7890"

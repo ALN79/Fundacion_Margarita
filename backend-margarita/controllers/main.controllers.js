@@ -92,7 +92,7 @@ export const loginUsersCtrl = async (req, res) => {
       else {
         const token = jwt.sign(
           {
-            id: searchUser[0].id,
+            id: searchUser[0].id_usuario,
             email: searchUser[0].email,
             username: searchUser[0].nombre_us,
           },
