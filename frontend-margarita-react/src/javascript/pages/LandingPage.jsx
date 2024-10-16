@@ -101,9 +101,7 @@ export function LandingPage() {
         )}
         <div>
           <h2 className="text-lg sm:text-xl font-semibold mb-2">{article.title}</h2>
-          {article.description && (
-            <p className="text-sm sm:text-base text-gray-700 mb-2">{article.description}</p>
-          )}
+
         </div>
       </div>
     ));
@@ -133,6 +131,7 @@ export function LandingPage() {
       </button>
     </div>
   );
+
   return (
     <div className="bg-custom-bg-2 bg-cover min-h-screen">
       <Header />
@@ -224,7 +223,7 @@ export function LandingPage() {
           </motion.aside>
         </div>
 
-        <div className="mt-8">{totalPages > 1 && renderPagination()}</div>
+        {renderPagination()}
       </main>
       <Footer />
     </div>
