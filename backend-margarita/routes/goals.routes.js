@@ -6,7 +6,7 @@ import {
 }
     from "../controllers/goals.controllers.js";
 
-import { authenticateJWTCtrl } from "../helpers/authenticateJWT.js";
+import { authenticateJWTCtrl } from "../middlewares/authenticateJWT.js";
 
 const routerGoals = Router()
 

@@ -8,12 +8,12 @@ import { ContactPage } from './javascript/pages/ContactPage';
 import { AboutUsPage } from './javascript/pages/AboutUsPage';
 import {NoSessionPage} from "./javascript/pages/NoSessionPage"
 import { LoadingPage } from './javascript/pages/loadingPage';
-import { Binance } from './javascript/pages/binance.jsx';
+import { Binance } from './javascript/pages/Binance';
 import { UpdatePasswordPage } from './javascript/pages/updatePasswordPage.jsx';
 import {GoalsPage} from "./javascript/pages/GoalsPage.jsx"
 import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
 import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
-import { OneGoalPage } from './javascript/pages/oneGoalPage.jsx';
+import { OneGoalPage } from './javascript/pages/OneGoalPage.jsx';
 
 function App() {
 

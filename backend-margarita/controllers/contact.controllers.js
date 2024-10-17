@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import crypto from "crypto";
+import { ConnectionDataBase } from "../src/database.js";
 dotenv.config();
 
 // Configura Nodemailer

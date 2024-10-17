@@ -9,6 +9,8 @@ import {
 } 
 from "../controllers/user.controllers.js";
 
+import { authenticateJWTCtrl } from "../middlewares/authenticateJWT.js";
+
 const routerUser = Router();
 
 routerUser.post("/registerUsers", registerUsersCtrl);

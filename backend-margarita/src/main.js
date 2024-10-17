@@ -2,8 +2,11 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from 'cookie-parser';
-import { router } from "../routes/main.routes.js";
 import dotenv from 'dotenv';
+import { routerContact } from "../routes/contact.routes.js";
+import { routerGoals } from "../routes/goals.routes.js";
+import { routerUser } from "../routes/user.routes.js";
+import { routerTransfer } from "../routes/transfer.routes.js";
 
 dotenv.config();
 
@@ -21,7 +24,7 @@ app.use(cors({
 app.use(express.json())
 app.use(morgan("dev"))
 app.use(cookieParser());
-app.use(router)
+app.use(routerContact, routerGoals, routerUser,routerTransfer)
 
 //Inicio del servidor en PORT 3000
 app.listen(process.env.PORT, () => {
