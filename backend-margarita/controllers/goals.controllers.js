@@ -9,6 +9,7 @@ export const getInfoQuoteCtrl = async (req,res) => {
 
     connection.end()
     
+    //Selecciona una frase random
     let randomQuoteIndex = Math.floor(Math.random() * quotes.length)
 
     const RandomQuote =
@@ -18,6 +19,7 @@ export const getInfoQuoteCtrl = async (req,res) => {
             frase: quotes[randomQuoteIndex].frase,
         };
 
+    //La envia al frontend
     res.json([RandomQuote])
 
     } catch (error) {
@@ -28,6 +30,7 @@ export const getInfoQuoteCtrl = async (req,res) => {
 }
 
 export const uploadGoalsCtrl = async (req, res) => {
+    //Agarra la información de la causa
     try {
         const { titleGoal, descriptionGoal, numberContactGoal, emailContactGoal, typeGoal, amountGoal } = req.body;
         
@@ -35,12 +38,14 @@ export const uploadGoalsCtrl = async (req, res) => {
 
         const connection = await ConnectionDataBase();
 
+        //Verifica la autorización del usuario
         const user = req.user;
 
         if (!user) {
             return res.status(401).json({ message: "No autorizado" });
         }
 
+        //Define el tipo de causa
         const [idGoal] = await connection.query("SELECT id_tipo_causa FROM tipos_causa WHERE tipo_causa = ?", [typeGoal]);
 
         if (idGoal.length === 0) {

@@ -1,6 +1,6 @@
 import { ConnectionDataBase } from "../src/database.js";
 
-
+//!No esta terminado, actualizar base de datos
 class BitcoinWallet {
     constructor() {
       this.balance = 0; // Saldo inicial
