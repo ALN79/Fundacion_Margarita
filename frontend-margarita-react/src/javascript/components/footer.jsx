@@ -49,7 +49,7 @@ export function Footer() {
         </div>
 
         <div className="w-full sm:flex sm:items-center sm:justify-center mt-4">
-          <FlowbiteFooter.Copyright href="#" by="All Rights Reserved. FundaciónMargarita" year={2024} />
+          <FlowbiteFooter.Copyright href="#" by=" All Rights Reserved. Fundación Margarita" year={2024} />
         </div>
       </div>
     </FlowbiteFooter>
