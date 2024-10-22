@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { authUser } from '../services/services.users/authUser';
+import { useLocation } from 'react-router-dom';
 
 export default function MargaritasTransfer() {
   const [toAddress, setToAddress] = useState('');
@@ -9,11 +11,32 @@ export default function MargaritasTransfer() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { user, loading: authLoading } = authUser();
+  
+  // Usar useLocation para obtener los parámetros de la URL
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  
+  useEffect(() => {
+    // Establecer toAddress si hay un valor en la URL
+    const scannedAddress = queryParams.get('toAddress');
+    if (scannedAddress) {
+      setToAddress(scannedAddress);
+    }
+  }, [queryParams]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage('');
     setIsError(false);
+
+    if (authLoading || !user || !user.id) {
+      setIsError(true);
+      setMessage('Error: no se pudo obtener el ID del usuario.');
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:3000/simulate-transfer', {
@@ -22,7 +45,7 @@ export default function MargaritasTransfer() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id_usuario: '', // ACA HAY QUE CAMBIAR PARA QUE RECIBA EL ID DE USUARIO
+          id_usuario: user.id,
           toAddress,
           amount,
         }),
@@ -58,6 +81,10 @@ export default function MargaritasTransfer() {
     }
     setAmount(parts.join('.'));
   };
+
+  if (authLoading) {
+    return <div>Cargando datos del usuario...</div>;
+  }
 
   return (
     <>

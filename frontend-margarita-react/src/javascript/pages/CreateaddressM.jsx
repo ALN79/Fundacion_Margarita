@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import QRCode from 'react-qr-code'; // Importa react-qr-code
+import QRCode from 'react-qr-code';
+import { authUser } from '../services/services.users/authUser';
 
 export const CreateaddressM = () => {
     const [address, setAddress] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const { user, loading: authLoading } = authUser(); 
+
     const handleCreateAddress = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
+
+        if (!user || !user.id) {
+            setError('Error: no se pudo obtener el ID del usuario');
+            setLoading(false);
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:3000/create-address', {
@@ -19,7 +28,7 @@ export const CreateaddressM = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id_usuario: 'TU_ID_USUARIO' }), // aca hay que cambiarlo para que reciba el id de usuario
+                body: JSON.stringify({ id_usuario: user.id }),
             });
 
             const data = await response.json();
@@ -35,6 +44,13 @@ export const CreateaddressM = () => {
             setLoading(false);
         }
     };
+
+    if (authLoading) {
+        return <div>Cargando datos del usuario...</div>; 
+    }
+
+
+    const qrCodeValue = address ? `http://localhost:5173/TransferM?toAddress=${encodeURIComponent(address)}` : '';
 
     return (
         <div>
@@ -54,7 +70,7 @@ export const CreateaddressM = () => {
                         <div className="mt-4">
                             <h3 className="text-lg font-semibold text-center">Dirección creada:</h3>
                             <p className="text-gray-600 text-center">{address}</p>
-                            <QRCode value={address} size={128} className="mt-2 mx-auto" />
+                            <QRCode value={qrCodeValue} size={128} className="mt-2 mx-auto" />
                         </div>
                     )}
                     {error && (

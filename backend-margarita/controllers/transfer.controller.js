@@ -126,7 +126,7 @@ export const buyFunds = async (req, res) => {
   try {
     // Insertar la transacción para agregar fondos
     await connection.query(
-      'INSERT INTO transactions (id_usuario, amount, type) VALUES (?, ?, "buy")',
+      'INSERT INTO transactions (id_usuario, amount, type) VALUES (?, ?, "add")',
       [id_usuario, amount]
     );
 
