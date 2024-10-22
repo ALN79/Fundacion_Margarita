@@ -33,46 +33,46 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path="/login"
+        <Route path="/login/*"
           element={user ? <Navigate to={"/home"} /> : <LoginPage />}
         />
-        <Route path="/register"
+        <Route path="/register/*"
           element={user ? <Navigate to={"/home"} /> : <RegisterPage />}
         />
-        <Route path="/recover"
+        <Route path="/recover/*"
           element={user ? <Navigate to={"/home"} /> : <RecoverPage />}
         />
-        <Route path="/reset/:token"
+        <Route path="/reset/:token/*"
           element={user ? <Navigate to={"/home"} /> : <UpdatePasswordPage/>}
         />
-        <Route path="/home"
+        <Route path="/home/*"
           element={user ? <LandingPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/contact"
+        <Route path="/contact/*"
           element={user ? <ContactPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/goals"
+        <Route path="/goals/*"
           element={user ? <GoalsPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/upload-goals"
+        <Route path="/upload-goals/*"
           element={user ? <UploadGoalsPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/goal/:id"
+        <Route path="/goal/:id/*"
           element={user ? <OneGoalPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="/TransferM"
+        <Route path="/TransferM/*"
           element={user ? <MargaritasTransfer /> : <Navigate to={"/login"} />}
         />
-        <Route path="/CreateaddressM"
+        <Route path="/CreateaddressM/*"
           element={user ? <CreateaddressM /> : <Navigate to={"/login"} />} // Esto es solo para ver lo de la creaccion de direcciones no se usara
         />
-        <Route path="/aboutUs"
+        <Route path="/aboutUs/*"
           element = {<AboutUsPage/>}
         />
-        <Route path="/"
+        <Route path="/*"
           element = {<NoSessionPage/>}
         />
-          <Route path="/Profile"
+          <Route path="/Profile/*"
           element={user ? <ProfilePage /> : <Navigate to={"/login"} />}
         />
       </Routes>
