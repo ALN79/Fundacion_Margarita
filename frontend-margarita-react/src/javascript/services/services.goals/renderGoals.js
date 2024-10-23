@@ -1,0 +1,5 @@
+const renderGoals = () => {
+
+    const goalsInfo = ""
+
+}

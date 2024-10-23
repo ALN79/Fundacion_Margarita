@@ -71,3 +71,21 @@ export const uploadGoalsCtrl = async (req, res) => {
         res.status(500).json({ message: "Error al subir las causas" });
     }
 };
+
+export const renderGoalsCtrl = async (req,res) => {
+    try {
+        const connection = await ConnectionDataBase()
+
+        const [infoGoals] = connection.query("SELECT titulo_causa, descripcion FROM causas")
+
+        const infoGoal = infoGoals[0]
+
+        connection.end()
+    } catch (error) {
+        console.error("Error al recibir la información de las causas")
+    }
+
+    const goal = {
+        
+    }
+}
