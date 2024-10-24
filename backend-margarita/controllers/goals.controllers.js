@@ -76,16 +76,25 @@ export const renderGoalsCtrl = async (req,res) => {
     try {
         const connection = await ConnectionDataBase()
 
-        const [infoGoals] = connection.query("SELECT titulo_causa, descripcion FROM causas")
+        const [infoGoal] = await connection.query("SELECT id_causa, titulo_causa, descripcion FROM causas")
 
-        const infoGoal = infoGoals[0]
+        if (infoGoal.length === 0) {
+            return res.status(404).json({ message: "No se encontraron causas" });
+        }
 
+        console.log(infoGoal)
+    
         connection.end()
-    } catch (error) {
-        console.error("Error al recibir la información de las causas")
-    }
 
-    const goal = {
-        
+        const goals = infoGoal.map(goal => ({
+            "id":goal.id_causa,
+            "title": goal.titulo_causa,
+            "description": goal.descripcion
+        })) 
+
+        res.json(goals)
+
+    } catch (error) {
+        console.error("Error al recibir la información de las causas",error)
     }
 }

@@ -2,7 +2,8 @@ import { Router } from "express";
 
 import {
     getInfoQuoteCtrl,
-    uploadGoalsCtrl
+    uploadGoalsCtrl,
+    renderGoalsCtrl
 }
     from "../controllers/goals.controllers.js";
 
@@ -12,5 +13,7 @@ const routerGoals = Router()
 
 routerGoals.get("/quotes-info", getInfoQuoteCtrl)
 routerGoals.post("/upload-goals", authenticateJWTCtrl, uploadGoalsCtrl)
+routerGoals.get("/get-info-goals", renderGoalsCtrl)
+
 
 export {routerGoals}

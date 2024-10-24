@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
@@ -7,6 +7,33 @@ import { QuotesGoals } from "../components/QuotesGoals";
 import { Link } from "react-router-dom";
 
 export function GoalsPage() {
+    const [goals, setGoals] = useState([]); // Estado para almacenar las metas
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchGoals = async () => {
+            try {
+                const data = await renderGoals();
+                setGoals(data);
+            } catch (err) {
+                setError("No se pudo obtener las causas");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchGoals();
+    }, []);
+
+    if (loading) {
+        return <div>Cargando...</div>; // Puedes agregar un componente de carga aquí
+    }
+
+    if (error) {
+        return <div className='text-yellow-400'>Error al obtener las causas, inténtelo más tarde</div>;
+    }
+
     return (
         <div className="min-h-screen bg-custom-bg-2 ">
             <Header />
@@ -32,27 +59,9 @@ export function GoalsPage() {
                     <QuotesGoals />
                 </div>
 
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
-                <div className="w-fit h-fit bg-yellow-400 rounded-xl">
-                    <CardGoals />
-                </div>
+                {goals.map((goal, index) => (
+                    <CardGoals key={index} goal={goal} /> // Pasar 'goal' como prop
+                ))}
 
                 <div className="relative w-4/5 bg-yellow-400 rounded-xl sm:col-span-1">
                     <QuotesGoals />
