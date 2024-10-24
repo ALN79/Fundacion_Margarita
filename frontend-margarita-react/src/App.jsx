@@ -15,6 +15,7 @@ import { UploadGoalsPage } from './javascript/pages/UploadGoalsPage.jsx';
 import { ProfilePage } from './javascript/pages/ProfilePage.jsx';
 import { OneGoalPage } from './javascript/pages/OneGoalPage.jsx';
 
+
 function App() {
 
   //Desestructura user y loading del resultado de la función

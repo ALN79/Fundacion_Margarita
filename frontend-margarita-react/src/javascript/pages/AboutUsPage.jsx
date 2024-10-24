@@ -6,16 +6,25 @@ import { NoSessionHeader } from "../components/NoSessionHeader";
 import { authUser } from "../services/services.users/authUser";
 import { LoadingPage } from "./loadingPage";
 
-import { FaTshirt, FaBreadSlice, FaDonate, FaBitcoin, FaShareAlt } from "react-icons/fa";
+import {
+  FaTshirt,
+  FaBreadSlice,
+  FaDonate,
+  FaBitcoin,
+  FaShareAlt,
+} from "react-icons/fa";
 
 export function AboutUsPage() {
   const { user, loading } = authUser();
 
   // Manejo de estado para mostrar u ocultar las descripciones
   const [mostrarDescripcionRopa, setMostrarDescripcionRopa] = useState(false);
-  const [mostrarDescripcionComida, setMostrarDescripcionComida] = useState(false);
-  const [mostrarDescripcionDinero, setMostrarDescripcionDinero] = useState(false);
-  const [mostrarDescripcionCripto, setMostrarDescripcionCripto] = useState(false);
+  const [mostrarDescripcionComida, setMostrarDescripcionComida] =
+    useState(false);
+  const [mostrarDescripcionDinero, setMostrarDescripcionDinero] =
+    useState(false);
+  const [mostrarDescripcionCripto, setMostrarDescripcionCripto] =
+    useState(false);
   const [mostrarDescripcionRedes, setMostrarDescripcionRedes] = useState(false);
 
   if (loading) {
@@ -27,18 +36,18 @@ export function AboutUsPage() {
     if (navigator.share) {
       navigator
         .share({
-          title: 'Ayuda a nuestra causa',
-          text: 'Únete a nosotros y ayuda a hacer un cambio positivo en el mundo.',
+          title: "Ayuda a nuestra causa",
+          text: "Únete a nosotros y ayuda a hacer un cambio positivo en el mundo.",
           url: window.location.href, // URL de la página actual
         })
         .then(() => {
-          console.log('Compartido con éxito');
+          console.log("Compartido con éxito");
         })
         .catch((error) => {
-          console.error('Error al compartir:', error);
+          console.error("Error al compartir:", error);
         });
     } else {
-      alert('Lo siento, tu navegador no soporta la función de compartir.');
+      alert("Lo siento, tu navegador no soporta la función de compartir.");
     }
   };
 
@@ -61,7 +70,10 @@ export function AboutUsPage() {
 
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 p-6">
-            <h2 id="mision" className="text-2xl font-semibold mb-4 relative inline-block">
+            <h2
+              id="mision"
+              className="text-2xl font-semibold mb-4 relative inline-block"
+            >
               Nuestra misión
               <motion.span
                 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-yellow-400"
@@ -78,24 +90,24 @@ export function AboutUsPage() {
               interacción entre donantes y proyectos sociales, asegurando que
               cada contribución llegue a quienes más lo necesitan.
             </p>
-<div id="equipo">
-            <h2 className="text-2xl font-semibold mb-4 relative inline-block">
-              Nuestro equipo
-              <motion.span
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-yellow-400"
-                initial={{ width: "0%" }}
-                whileInView={{ width: "75%" }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              />
-            </h2>
-            <p className="text-gray-700">
-              Nuestro equipo está compuesto por profesionales apasionados por el
-              cambio social. Trabajamos incansablemente para asegurarnos de que
-              cada proyecto en nuestra plataforma tenga el apoyo necesario para
-              tener éxito. ¡Únete a nosotros en nuestra misión de hacer el mundo
-              un lugar mejor!
-            </p>
-          </div>
+            <div id="equipo">
+              <h2 className="text-2xl font-semibold mb-4 relative inline-block">
+                Nuestro equipo
+                <motion.span
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-yellow-400"
+                  initial={{ width: "0%" }}
+                  whileInView={{ width: "75%" }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                />
+              </h2>
+              <p className="text-gray-700">
+                Nuestro equipo está compuesto por profesionales apasionados por
+                el cambio social. Trabajamos incansablemente para asegurarnos de
+                que cada proyecto en nuestra plataforma tenga el apoyo necesario
+                para tener éxito. ¡Únete a nosotros en nuestra misión de hacer
+                el mundo un lugar mejor!
+              </p>
+            </div>
           </div>
 
           <div className="lg:w-1/2 p-6">
@@ -113,11 +125,8 @@ export function AboutUsPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
             Nuestros Valores
-            
-          </h2 >
+          </h2>
           <div className="flex flex-col lg:flex-row justify-around items-center">
-            
-
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -190,7 +199,9 @@ export function AboutUsPage() {
             <div className="flex flex-col items-center text-center max-w-xs group">
               <div
                 className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center transition-transform duration-300 transform hover:bg-yellow-400 hover:scale-110 cursor-pointer"
-                onClick={() => setMostrarDescripcionRopa(!mostrarDescripcionRopa)}
+                onClick={() =>
+                  setMostrarDescripcionRopa(!mostrarDescripcionRopa)
+                }
               >
                 <FaTshirt className="text-2xl" />
               </div>
@@ -199,17 +210,23 @@ export function AboutUsPage() {
                 <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
               </p>
               <p
-                className={`text-sm text-black mt-1 transition-opacity duration-300 ${mostrarDescripcionRopa ? 'bg-gray-200 bg-opacity-70 opacity-100' : 'opacity-0'
-                  } sm:block`}
+                className={`text-sm text-black mt-1 transition-opacity duration-300 ${
+                  mostrarDescripcionRopa
+                    ? "bg-gray-200 bg-opacity-70 opacity-100"
+                    : "opacity-0"
+                } sm:block`}
               >
-                Ayuda a quienes más lo necesitan donando ropa en buen estado para abrigar y proteger a familias en situación vulnerable.
+                Ayuda a quienes más lo necesitan donando ropa en buen estado
+                para abrigar y proteger a familias en situación vulnerable.
               </p>
             </div>
 
             <div className="flex flex-col items-center text-center max-w-xs group">
               <div
                 className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center transition-transform duration-300 transform hover:bg-yellow-400 hover:scale-110 cursor-pointer"
-                onClick={() => setMostrarDescripcionComida(!mostrarDescripcionComida)}
+                onClick={() =>
+                  setMostrarDescripcionComida(!mostrarDescripcionComida)
+                }
               >
                 <FaBreadSlice className="text-2xl" />
               </div>
@@ -218,17 +235,23 @@ export function AboutUsPage() {
                 <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
               </p>
               <p
-                className={`text-sm text-black mt-1 transition-opacity duration-300 ${mostrarDescripcionComida ? 'bg-gray-200 bg-opacity-70 opacity-100' : 'opacity-0'
-                  } sm:block`}
+                className={`text-sm text-black mt-1 transition-opacity duration-300 ${
+                  mostrarDescripcionComida
+                    ? "bg-gray-200 bg-opacity-70 opacity-100"
+                    : "opacity-0"
+                } sm:block`}
               >
-                Contribuye con alimentos no perecederos y ayuda a combatir el hambre en tu comunidad.
+                Contribuye con alimentos no perecederos y ayuda a combatir el
+                hambre en tu comunidad.
               </p>
             </div>
 
             <div className="flex flex-col items-center text-center max-w-xs group">
               <div
                 className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center transition-transform duration-300 transform hover:bg-yellow-400 hover:scale-110 cursor-pointer"
-                onClick={() => setMostrarDescripcionDinero(!mostrarDescripcionDinero)}
+                onClick={() =>
+                  setMostrarDescripcionDinero(!mostrarDescripcionDinero)
+                }
               >
                 <FaDonate className="text-2xl" />
               </div>
@@ -237,8 +260,11 @@ export function AboutUsPage() {
                 <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
               </p>
               <p
-                className={`text-sm text-black mt-1 transition-opacity duration-300 ${mostrarDescripcionDinero ? 'bg-gray-200 bg-opacity-70 opacity-100' : 'opacity-0'
-                  } sm:block`}
+                className={`text-sm text-black mt-1 transition-opacity duration-300 ${
+                  mostrarDescripcionDinero
+                    ? "bg-gray-200 bg-opacity-70 opacity-100"
+                    : "opacity-0"
+                } sm:block`}
               >
                 Ayuda económica para financiar proyectos que cambian vidas.
               </p>
@@ -247,7 +273,9 @@ export function AboutUsPage() {
             <div className="flex flex-col items-center text-center max-w-xs group">
               <div
                 className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center transition-transform duration-300 transform hover:bg-yellow-400 hover:scale-110 cursor-pointer"
-                onClick={() => setMostrarDescripcionCripto(!mostrarDescripcionCripto)}
+                onClick={() =>
+                  setMostrarDescripcionCripto(!mostrarDescripcionCripto)
+                }
               >
                 <FaBitcoin className="text-2xl" />
               </div>
@@ -256,10 +284,14 @@ export function AboutUsPage() {
                 <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
               </p>
               <p
-                className={`text-sm text-black mt-1 transition-opacity duration-300 ${mostrarDescripcionCripto ? 'bg-gray-200 bg-opacity-70 opacity-100' : 'opacity-0'
-                  } sm:block`}
+                className={`text-sm text-black mt-1 transition-opacity duration-300 ${
+                  mostrarDescripcionCripto
+                    ? "bg-gray-200 bg-opacity-70 opacity-100"
+                    : "opacity-0"
+                } sm:block`}
               >
-                Contribuye con criptomonedas y forma parte de un movimiento innovador para ayudar a quienes lo necesitan.
+                Contribuye con criptomonedas y forma parte de un movimiento
+                innovador para ayudar a quienes lo necesitan.
               </p>
             </div>
 
@@ -275,8 +307,11 @@ export function AboutUsPage() {
                 <span className="block h-1 bg-yellow-400 absolute left-0 bottom-0 w-0 transition-all duration-300 group-hover:w-full"></span>
               </p>
               <p
-                className={`text-sm text-black mt-1 transition-opacity duration-300 ${mostrarDescripcionRedes ? 'bg-gray-200 bg-opacity-70 opacity-100' : 'opacity-0'
-                  } sm:block`}
+                className={`text-sm text-black mt-1 transition-opacity duration-300 ${
+                  mostrarDescripcionRedes
+                    ? "bg-gray-200 bg-opacity-70 opacity-100"
+                    : "opacity-0"
+                } sm:block`}
               >
                 Ayuda a difundir la causa compartiendo en tus redes sociales.
               </p>
